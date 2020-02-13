@@ -26,6 +26,7 @@ public class LoginController {
 	@GetMapping("/")
 	public String welcome() {
 		return "redirect:/public/";
+		//prueba git
 	}
 	
 	
