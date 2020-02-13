@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Elletersa Nuevo Producto</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/styles.css"
+	th:href="@{/css/styles.css}">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<div class="container text-center">
+			<h1>Second-Hand-Market</h1>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Elletersa</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="public/">Inicio<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="productos">Productos</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+	<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<form method="post" enctype="multipart/form-data" action="#"
+					th:action="${producto.id != 0} ? @{/app/producto/editar/submit} : @{/productos/producto/nuevo/submit}"
+					th:object="${producto}">
+					<h1
+						th:text="${producto.id != 0} ? '${producto.nombre}' : 'Nuevo producto'">Nuevo
+						producto</h1>
+					<input type="hidden" id="id" name="id" th:field="*{id}" />
+					<div class="form-group">
+						<label for="nombre">Nombre</label> <input type="text"
+							class="form-control" id="nombre" placeholder="Nombre"
+							th:field="*{nombre}" />
+					</div>
+					<div class="form-group">
+						<label for="precio">Precio</label> <input type="number" step="0.01"
+							class="form-control" id="precio" placeholder="1.00"
+							th:field="*{precio}" />
+
+					</div>
+					<div class="form-group">
+						<label for="file">Imagen</label> <input id="filebutton"
+							name="file" class="form-control input-file" type="text">
+					</div>
+
+					
+					
+				</form>
+						<div sec:authorize="isAuthenticated()">
+			<a th:href="@{/productos/{id}/eliminar(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
+									<span class="glyphicon glyphicon-remove" ></span> Eliminar
+								</a>
+								</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+		th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+
+
+
+</body>
+</html>
