@@ -61,8 +61,8 @@ public class ProductoServicio {
 		return repositorio.findAll();
 	}
 	
-	public List<Producto> buscar(String query) {
-		return repositorio.findByNombreContainsIgnoreCase(query);
+	public List<Producto> buscar(String query, Pageable pageable) {
+		return repositorio.findAllByNombreContainsIgnoreCase(pageable, query);
 	}
 	
 //	public List<Producto> buscarMisProductos(String query, Usuario u) {
@@ -77,8 +77,11 @@ public class ProductoServicio {
 		return repositorio.findAllByOrderByPrecio(pageable);
 	}
 
-	public List<Producto> findAllByTipo(TIPO_PRODUCTO tipo, Pageable pageable) {
+	public List<Producto> findAllByTipo(TIPO_PRODUCTO tipo) {
 		return repositorio.findAllByTipo(tipo);
 	}
 
+	public List<Producto> findAllByTipo(TIPO_PRODUCTO tipo, Pageable pageable) {
+		return repositorio.findAllByTipo(pageable,tipo);
+	}
 }

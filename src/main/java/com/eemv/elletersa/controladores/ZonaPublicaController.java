@@ -3,6 +3,8 @@ package com.eemv.elletersa.controladores;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,7 @@ public class ZonaPublicaController {
 	@Autowired
 	ProductoServicio productoServicio;
 	
+	private static final Logger LOGGER=LoggerFactory.getLogger(ZonaPublicaController.class);
 	
 	@GetMapping({"/", "/index"})
 	public String index() {
@@ -37,23 +40,23 @@ public class ZonaPublicaController {
 
 		List<Producto> result;
 		Integer page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1) : 0;
+		String tipo =params.get("tipo") != null ? (params.get("tipo").toString()) : "";
+		PageRequest pageRequest = null;
 		if( params.get("page") != null && Integer.valueOf((String) params.get("page")) != 0 ) {
 			model.addAttribute("numPage", page);
+			pageRequest = PageRequest.of(page, 2);
 		}else {
 			model.addAttribute("numPage", 0);
+			pageRequest = PageRequest.of(0, 2);
 		}
-		PageRequest pageRequest = PageRequest.of(page, 2);
-		 result = productoServicio.findAllByPage(pageRequest);
-		
-		String tipo =params.get("tipo") != null ? (params.get("tipo").toString()) : "";
 		
 		if( params.get("tipo") != null && (String) params.get("tipo") != "") {
 			model.addAttribute("tipo", tipo);
 			TIPO_PRODUCTO tipoP = TIPO_PRODUCTO.valueOf(tipo);
-			result = productoServicio.findAllByTipo(tipoP, pageRequest);
+			result = productoServicio.findAllByTipo(tipoP,pageRequest);
+		}else {
+		 result = productoServicio.findAllByPage(pageRequest);
 		}
-		
-		
 		
 		if (result != null) {
 			model.addAttribute("productos", result);
@@ -70,5 +73,15 @@ public class ZonaPublicaController {
 		}
 		return "app/producto/form";
 	}
-
+	
+	@GetMapping("/productos/search/{search}")
+	public String searchProduct(Model model, @PathVariable String search) {
+		PageRequest pageRequest = PageRequest.of(0, 10);
+		List<Producto> result = productoServicio.buscar(search, pageRequest); 
+		if (result != null) {
+			model.addAttribute("productos", result);
+		}
+		return "productos";
+	}
+	
 }
