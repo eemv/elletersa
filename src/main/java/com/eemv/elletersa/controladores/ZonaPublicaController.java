@@ -42,7 +42,7 @@ public class ZonaPublicaController {
 		}else {
 			model.addAttribute("numPage", 0);
 		}
-		PageRequest pageRequest = PageRequest.of(page, 2);
+		PageRequest pageRequest = PageRequest.of(page, 4);
 		 result = productoServicio.findAllByPage(pageRequest);
 		
 		String tipo =params.get("tipo") != null ? (params.get("tipo").toString()) : "";
