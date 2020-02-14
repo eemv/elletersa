@@ -12,13 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SeguridadConfig extends WebSecurityConfigurerAdapter{
-	
-	
+public class SeguridadConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	UserDetailsService userDetailsService;
-	
-	
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -31,21 +29,12 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-				.antMatchers("/", "/webjars/**", "/css/**", "/public/**", "/auth/**").permitAll()
-				.anyRequest().authenticated()
-				.and()
-			.formLogin()
-				.loginPage("/auth/login")
-				.defaultSuccessUrl("/public/index", true)
-				.loginProcessingUrl("/auth/login-post")
-				.permitAll()
-				.and()
-			.logout()
-				.logoutUrl("/auth/logout") 
-				.logoutSuccessUrl("/public/index");
-		
-		
+		http.authorizeRequests()
+				.antMatchers("/", "/webjars/**", "/css/**", "/js/**", "/html/**", "/images/**", "/public/**",
+						"/auth/**")
+				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/auth/login")
+				.defaultSuccessUrl("/public/index", true).loginProcessingUrl("/auth/login-post").permitAll().and()
+				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/public/index");
+
 	}
 }
