@@ -4,13 +4,77 @@
 	width: 100%;
 }
 
-body {
-	
+@charset "UTF-8";
+
+.wrap {
+	position:relative;
+	flex-wrap:wrap;
 }
+
+.gradient-box {
+	margin:20px;
+	padding:0px;
+	align-items: center;
+	max-width: 22em;
+	position: relative;
+	box-sizing: border-box;
+	color: #000;
+	background: #FFF;
+	/*background-clip: padding-box;*/
+	border-radius: 1em;
+	transition: 0.5s;
+    transition-timing-function: ease-in;
+}
+
+.gradient-box:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	margin: -3px;
+    /* !importanté */
+	border-radius: inherit;
+    /* !importanté */
+	background: linear-gradient(to right, #ff00d440, #33ff0063);
+}
+
+.gradient-box:hover {
+ /* animation: mymove 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in; */
+  transform: rotate(2deg);
+}
+
+@keyframes mymove {
+  from {transform: initial;}
+  to {transform: rotate(2deg);}
+}
+
+.product {
+	height: 240px;
+	width: 240px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.product-title {
+	border-image: linear-gradient(to right, #ff00d440, #33ff0063);
+    border-image-slice: 1;
+    border-top: 4px solid;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    text-align: center;
+}
+
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 .navbar {
 	margin-bottom: 50px;
 	border-radius: 0;
+	background: linear-gradient(to right, #ff00d429, #33ff003b);
 }
 
 .search {
