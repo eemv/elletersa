@@ -13,9 +13,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
 </head>
-
-<body>
-
+<body onload="actualItem()">
 <!-- Banner
 <div class="text-center">
 	<img src="../static/images/banner.png" th:src="@{/images/banner.png}" class="img-fluid rounded banner" alt="banner">
@@ -25,24 +23,26 @@
 <!-- Navbar -->
 <script>HTMLImporter.import("/html/navbar.html");</script>
 
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
- 	<a class="dropdown-item" href="/public/productos?tipo=TIPO1">Tipo1</a>
-    <a class="dropdown-item" href="/public/productos?tipo=TIPO2">Tipo2</a>
-    <a class="dropdown-item" href="/public/productos?tipo=TIPO3">Tipo3</a>
-  </div>
-</div>
+<button class="btn btn-primary" id="menu-toggle" onclick="centerProducts()">Categorías</button>
+<div class="d-flex" id="wrapper">
+<!-- Sidebar -->
+    <div class="sidebar" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+        <a id="t" href="/public/productos" class="list-group-item list-group-item-action sidebar-item sidebar-heading"><p>Todos</p></a>
+        <a id="t1" href="/public/productos?tipo=TIPO1" class="list-group-item list-group-item-action sidebar-item"><p>Tipo 1</p></a>
+        <a id="t2" href="/public/productos?tipo=TIPO2" class="list-group-item list-group-item-action sidebar-item"><p>Tipo 2</p></a>
+        <a id="t3" href="/public/productos?tipo=TIPO3" class="list-group-item list-group-item-action sidebar-item"><p>Tipo 3</p></a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
 <!-- Productos -->
-<div class="d-flex justify-content-center wrap">
+<div class="d-flex justify-content-center wrap margin-desktop margin-mobile" id="productos">
       <div class="d-inline-grid gradient-box" th:each="producto : ${productos}">
       
       <div>
       <a th:href="@{/public/producto/{id}(id=${producto.id})}">
-        <img class="img-fluid product" th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}" alt="product">
+        <img class="product" th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}" alt="product">
       </a>
       </div>
       
@@ -54,6 +54,7 @@
 </div>
 	<br>
 	
+</div>
 <!-- Paginación -->
 <div class="container d-flex justify-content-center">
 	<nav aria-label="Page navigation example">
@@ -64,7 +65,75 @@
   </ul>
   </nav>
 </div>
-
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    }
+    );
+    
+    function centerProducts() {
+    	var productos = document.getElementById("productos");
+    	var device = productos.style["margin-left"];
+    	console.log(device);
+    	if(productos.style["margin-left"] === "15em" && isMobile() === false) {
+    		productos.style["margin-left"] = "0em";
+    	} else if(productos.style["margin-left"] === "15em" && isMobile() === true) {
+    		productos.style["margin-left"] = "5em";
+    	} else {
+    		productos.style["margin-left"] = "15em";
+    	}
+    }
+	//Sidebar item
+      function actualItem() {
+          var url = window.location.href;
+          var aux;
+          
+          if(url.search("TIPO1") != "-1") {
+              
+        	  var t1=document.getElementById("t1");
+              
+              aux = document.createElement('div');
+              aux.innerHTML = t1.innerHTML;
+              aux.classList.add("actual-item");
+              
+              t1.classList.forEach(el => aux.classList.add(el));
+              t1.parentNode.replaceChild(aux, t1);
+              
+          } else if(url.search("TIPO2") != "-1") {
+			  
+        	  var t2=document.getElementById("t2");
+              
+              aux = document.createElement('div');
+              aux.innerHTML = t2.innerHTML;
+              aux.classList.add("actual-item");
+              
+              t2.classList.forEach(el => aux.classList.add(el));
+              t2.parentNode.replaceChild(aux, t2);
+              
+          } else if(url.search("TIPO3") != "-1") {
+        	  
+			  var t3=document.getElementById("t3");
+              
+              aux = document.createElement('div');
+              aux.innerHTML = t3.innerHTML;
+              aux.classList.add("actual-item");
+              
+              t3.classList.forEach(el => aux.classList.add(el));
+              t3.parentNode.replaceChild(aux, t3);
+              
+          } else {
+			  var t=document.getElementById("t");
+              
+              aux = document.createElement('div');
+              aux.innerHTML = t.innerHTML;
+              aux.classList.add("actual-item");
+              
+              t.classList.forEach(el => aux.classList.add(el));
+              t.parentNode.replaceChild(aux, t);
+          }
+      }
+</script>
 </body>
-
 </html>
