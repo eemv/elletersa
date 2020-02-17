@@ -23,7 +23,7 @@
 <!-- Navbar -->
 <script>HTMLImporter.import("/html/navbar.html");</script>
 
-<button class="btn btn-primary" id="menu-toggle" onclick="centerProducts()">Categorías</button>
+<button class="btn1 btn-filter" id="menu-toggle" onclick="centerProducts()">Categorías</button>
 <div class="d-flex" id="wrapper">
 <!-- Sidebar -->
     <div class="sidebar" id="sidebar-wrapper">
@@ -37,7 +37,7 @@
     <!-- /#sidebar-wrapper -->
 
 <!-- Productos -->
-<div class="d-flex justify-content-center wrap margin-desktop margin-mobile" id="productos">
+<div class="d-flex justify-content-center wrap margin-center" id="productos">
       <div class="d-inline-grid gradient-box" th:each="producto : ${productos}">
       
       <div>
@@ -76,14 +76,20 @@
     function centerProducts() {
     	var productos = document.getElementById("productos");
     	var device = productos.style["margin-left"];
+    	var filter = document.getElementById("menu-toggle");
+    	
     	console.log(device);
     	if(productos.style["margin-left"] === "15em" && isMobile() === false) {
     		productos.style["margin-left"] = "0em";
+        	filter.classList.remove("btn-filter-disabled");
     	} else if(productos.style["margin-left"] === "15em" && isMobile() === true) {
     		productos.style["margin-left"] = "5em";
+        	filter.classList.remove("btn-filter-disabled");
     	} else {
     		productos.style["margin-left"] = "15em";
+        	filter.classList.add("btn-filter-disabled");
     	}
+    	
     }
 	//Sidebar item
       function actualItem() {
