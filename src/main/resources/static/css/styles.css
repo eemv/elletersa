@@ -23,6 +23,7 @@
 	flex-wrap:wrap;
 }
 
+/* Productos Box */
 .gradient-box {
 	margin: 20px;
 	padding: 0px;
@@ -60,16 +61,6 @@
 	transform: rotate(2deg);
 }
 
-@
-keyframes mymove {
-	from {transform: initial;
-}
-
-to {
-	transform: rotate(2deg);
-}
-
-}
 .product {
 	height: 240px;
 	width: 240px;
@@ -87,11 +78,45 @@ to {
 	text-align: center;
 }
 
-/* Remove the navbar's default rounded borders and increase the bottom margin */
+/* Navbar */
 .navbar {
 	margin-bottom: 50px;
 	border-radius: 0;
+	height: 56px;
 	background: linear-gradient(to right, #ff00d429, #33ff003b);
+	transition: 0.5s;
+}
+
+.navbar-toggler:focus, .navbar-toggler:hover {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 1024px) {
+.nav-col {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.nav-col-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+}
+
+@
+keyframes mymove {
+	from {
+	display: none;
+}
+
+to {
+	display: block;
+}
+
 }
 
 /* Filter Button */
@@ -152,8 +177,6 @@ to {
 	text-decoration: underline;
 	}
 }
-
-.show{display:block!important}
 
 @media screen and (max-width: 1024px) {
 	.btn-filter {
@@ -253,7 +276,7 @@ body {
 		margin-left: -20rem;
 	}
 
-	/* Buscador */
+/* Buscador */
 	.search {
 		color: #ab6e23;
 		border-color: #ab6e23;
@@ -274,11 +297,6 @@ body {
 	.search:not (:disabled ):not (.disabled ).active:focus, .search:not (:disabled 
 		):not (.disabled ):active:focus, .show>.search.dropdown-toggle:focus {
 		box-shadow: 0 0 0 .2rem rgba(153, 97, 29, .5)
-	}
-
-	/* Remove the jumbotron's default bottom margin */
-	.jumbotron {
-		margin-bottom: 0;
 	}
 
 	/* Add a gray background color and some padding to the footer */

@@ -24,16 +24,16 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light">
+	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
 		<a class="navbar-brand" href="#">Elletersa</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
+			onclick="colapse()"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="navbar-collapse nav-col" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="/">Inicio<span
 						class="sr-only">(current)</span></a></li>
@@ -60,13 +60,16 @@
 
 	<script>
 		function colapse() {
-			var nav = document.getElementById("navbarSupportedContent").classList;
-			if (nav.contains("show") === true) {
-				nav.remove("show");
+			var nav = document.getElementById("nav");
+			var col = document.getElementById("navbarSupportedContent").classList;
+			if (col.contains("nav-col-active") === true) {
+				col.remove("nav-col-active");
 				console.log("remove");
+				nav.style.height = "";
 			} else {
 				console.log("show");
-				nav.add("show");
+				col.add("nav-col-active");
+				nav.style.height = "17em";
 			}
 		}
 	</script>
