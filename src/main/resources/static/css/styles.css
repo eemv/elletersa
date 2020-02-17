@@ -1,18 +1,22 @@
 @charset "UTF-8";
 
+body {
+	overflow-x: hidden; /*Sidebar*/
+	background-image: url(https://media.istockphoto.com/vectors/seamless-pattern-with-cute-gray-flowers-seamless-pattern-can-be-used-vector-id1157388049);
+}
 .banner {
 	width: 100%;
 }
 
 @charset "UTF-8";
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) {
 	.margin-center {
 		margin-left: 0em;
 	}
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.margin-center {
 		margin-left: 5em;
 	}
@@ -82,6 +86,8 @@
 .navbar {
 	margin-bottom: 50px;
 	border-radius: 0;
+	background-color: white !important;
+	border-bottom: 1px solid;
 	height: 56px;
 	background: linear-gradient(to right, #ff00d429, #33ff003b);
 	transition: 0.5s;
@@ -93,7 +99,7 @@
     box-shadow: none;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 .nav-col {
   visibility: hidden;
   opacity: 0;
@@ -149,7 +155,7 @@ to {
 	text-decoration: underline;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) {
 .btn-filter {
 	border-left: none;
 	border-top-left-radius: 0px;
@@ -178,7 +184,7 @@ to {
 	}
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
 	.btn-filter {
 	border-left: none;
 	border-top-left-radius: 0px;
@@ -203,10 +209,6 @@ to {
 }
 
 /* Sidebar */
-body {
-	overflow-x: hidden;
-}
-
 .sidebar {
 	margin-top: 1em;
 	border: 1px solid;

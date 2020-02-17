@@ -44,10 +44,10 @@ public class ZonaPublicaController {
 		PageRequest pageRequest = null;
 		if( params.get("page") != null && Integer.valueOf((String) params.get("page")) != 0 ) {
 			model.addAttribute("numPage", page);
-			pageRequest = PageRequest.of(page, 2);
+			pageRequest = PageRequest.of(page, 4);
 		}else {
 			model.addAttribute("numPage", 0);
-			pageRequest = PageRequest.of(0, 2);
+			pageRequest = PageRequest.of(0, 4);
 		}
 		
 		if( params.get("tipo") != null && (String) params.get("tipo") != "") {
