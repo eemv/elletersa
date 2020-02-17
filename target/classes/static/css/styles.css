@@ -7,13 +7,13 @@
 @charset "UTF-8";
 
 @media screen and (min-width: 1024px) {
-	.margin-desktop {
+	.margin-center {
 		margin-left: 0em;
 	}
 }
 
 @media screen and (max-width: 1024px) {
-	.margin-mobile {
+	.margin-center {
 		margin-left: 5em;
 	}
 }
@@ -23,6 +23,7 @@
 	flex-wrap:wrap;
 }
 
+/* Productos Box */
 .gradient-box {
 	margin: 20px;
 	padding: 0px;
@@ -60,16 +61,6 @@
 	transform: rotate(2deg);
 }
 
-@
-keyframes mymove {
-	from {transform: initial;
-}
-
-to {
-	transform: rotate(2deg);
-}
-
-}
 .product {
 	height: 240px;
 	width: 240px;
@@ -87,11 +78,128 @@ to {
 	text-align: center;
 }
 
-/* Remove the navbar's default rounded borders and increase the bottom margin */
+/* Navbar */
 .navbar {
 	margin-bottom: 50px;
 	border-radius: 0;
+	height: 56px;
 	background: linear-gradient(to right, #ff00d429, #33ff003b);
+	transition: 0.5s;
+}
+
+.navbar-toggler:focus, .navbar-toggler:hover {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 1024px) {
+.nav-col {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.nav-col-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+}
+
+@
+keyframes mymove {
+	from {
+	display: none;
+}
+
+to {
+	display: block;
+}
+
+}
+
+/* Filter Button */
+.btn1 {
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.btn-filter:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+	
+.btn-filter.focus, .btn-filter:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn:focus, .btn:hover {
+	text-decoration: underline;
+}
+
+@media screen and (min-width: 1024px) {
+.btn-filter {
+	border-left: none;
+	border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-left: 20px;
+	text-decoration: underline;
+    transform: translateY(-2.5em);
+	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+    border-color: black;
+    font-weight: 500;
+    color: #212529 !important;
+    transition: 0.5s;
+}
+
+.btn-filter:hover, .btn-filter-disabled {
+	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	text-decoration: none;
+	}
+
+.btn-filter-disabled {
+    padding: .375rem .75rem;
+	}
+	
+.btn-filter-disabled:hover {
+	text-decoration: underline;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.btn-filter {
+	border-left: none;
+	border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+	text-decoration: none;
+    transform: translateY(-2.5em);
+	background: linear-gradient(to right, #ff00d429, #33ff0045);
+    border-color: black;
+    font-weight: 500;
+    color: #212529 !important;
+    transition: 0.5s;
+}
+
+.btn-filter-disabled {
+	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	text-decoration: underline;
+	}
+
+.btn-filter-disabled {
+    padding-left: 20px;
+	}
 }
 
 /* Sidebar */
@@ -102,15 +210,10 @@ body {
 .sidebar {
 	margin-top: 1em;
 	border: 1px solid;
+	border-left: none;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
 	background: linear-gradient(to right, #ffd6f8, #e0f1d6);
-}
-
-.sidebar-head {
-	padding-top: 1em;
-	padding-bottom: 1em;
-	padding-right: 5em;
 }
 
 .sidebar-item {
@@ -144,6 +247,7 @@ body {
 #sidebar-wrapper .sidebar-heading {
 	padding: 0.875rem 1.25rem;
 	font-size: 1.2rem;
+	border-top-right-radius: 8px;
 }
 
 #sidebar-wrapper .list-group {
@@ -172,7 +276,7 @@ body {
 		margin-left: -20rem;
 	}
 
-	/* Buscador */
+/* Buscador */
 	.search {
 		color: #ab6e23;
 		border-color: #ab6e23;
@@ -193,11 +297,6 @@ body {
 	.search:not (:disabled ):not (.disabled ).active:focus, .search:not (:disabled 
 		):not (.disabled ):active:focus, .show>.search.dropdown-toggle:focus {
 		box-shadow: 0 0 0 .2rem rgba(153, 97, 29, .5)
-	}
-
-	/* Remove the jumbotron's default bottom margin */
-	.jumbotron {
-		margin-bottom: 0;
 	}
 
 	/* Add a gray background color and some padding to the footer */
