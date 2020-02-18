@@ -1,18 +1,13 @@
 package com.eemv.elletersa.servicios;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
-import com.eemv.elletersa.modelo.Usuario;
 import com.eemv.elletersa.repositorios.ProductoRepository;
 
 @Service
@@ -21,9 +16,6 @@ public class ProductoServicio {
 	@Autowired
 	ProductoRepository repositorio;
 	
-//	@Autowired
-//	StorageService storageService;
-//	
 	
 	public Producto insertar(Producto p) {
 		return repositorio.save(p);

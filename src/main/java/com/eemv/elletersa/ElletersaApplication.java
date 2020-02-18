@@ -1,10 +1,6 @@
 package com.eemv.elletersa;
 
 import java.util.Arrays;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,7 +12,6 @@ import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
 import com.eemv.elletersa.modelo.Usuario;
 import com.eemv.elletersa.repositorios.ProductoRepository;
-import com.eemv.elletersa.repositorios.UsuarioRepository;
 import com.eemv.elletersa.servicios.UsuarioServicio;
 
 
