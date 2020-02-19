@@ -32,7 +32,7 @@ public class ZonaPublicaController {
 	
 	@GetMapping("/productos")
 	public String showProducts(@RequestParam Map<String, Object> params, Model model) {
-		Integer itemsPerPage = 4;
+		Integer itemsPerPage = 1;
 		List<Producto> result;
 		Integer page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1) : 0;
 		String tipo =params.get("tipo") != null ? (params.get("tipo").toString()) : "";
