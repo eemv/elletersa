@@ -52,21 +52,160 @@
 	</div>
 	<br>
 </div>
-	<br>
-	
 </div>
+<br>	
+
 <!-- Paginación -->
-<div class="container d-flex justify-content-center">
-	<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" th:href="@{/public/productos?page={page}(page=${numPage})}">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="/public/productos?page=1">1</a></li>
-    <li class="page-item"><a class="page-link" th:href="@{/public/productos?page={page}(page=${numPage}+2)}">Next</a></li>
+<div id="pages" class="container justify-content-center no-display">
+	<nav>
+  <ul class="paginacion">
+    <li class="page-item"><a id="pag-prev" class="pag-but pag-prev" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}">Anterior</a></li>
+    
+    <li class="page-item"><a id="pag-1" class="pag-but" th:href="@{?page=1&tipo={tipo}(tipo=${tipo})}">1</a></li>
+    <li class="page-item"><a id="pag-i..." class="pag-but" href="">...</a></li>
+    <li class="page-item"><a id="pag-current-1" class="pag-but" th:text="${numPage}" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}"></a></li>
+    <li class="page-item"><a id="pag-current" class="pag-but" th:text="${numPage}+1"></a></li>
+    <li class="page-item"><a id="pag-current+1" class="pag-but" th:text="${numPage}+2" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}"></a></li>
+    <li class="page-item"><a id="pag-d..." class="pag-but" href="">...</a></li>
+    <li class="page-item"><a id="pag-max" class="pag-but" th:text="${maxPaginas}" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${maxPaginas})}"></a></li>
+    
+    <li class="page-item"><a id="pag-next" class="pag-but pag-next" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}">Siguiente</a></li>
   </ul>
   </nav>
 </div>
-<!-- Menu Toggle Script -->
+
+
+
+
 <script>
+function actualItem() {
+    var url = window.location.href;
+    var aux;
+    //Paginación
+    var maxPag = document.getElementById("pag-max").innerHTML;
+    
+    if(maxPag === "1") {
+        document.getElementById("pag-i...").style.display = "none";
+        document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current-1").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	document.getElementById("pag-max").style.display = "none";
+    	
+        document.getElementById("pag-next").classList.add("disabled");
+    } else if(maxPag === "2") {
+        document.getElementById("pag-i...").style.display = "none";
+        document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current-1").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	if(url.search("page=2") !="-1") {
+        document.getElementById("pag-max").style.display = "none";
+        document.getElementById("pag-next").classList.add("disabled");
+    	}
+
+    } else if(maxPag === "3") {
+        document.getElementById("pag-i...").style.display = "none";
+        document.getElementById("pag-d...").style.display = "none";
+    	if(url.search("page=2") !="-1") {
+        document.getElementById("pag-max").style.display = "none";
+    	} else if(url.search("page=3") !="-1") {
+        document.getElementById("pag-max").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+        document.getElementById("pag-next").classList.add("disabled");
+    	}
+
+    }
+    
+    if(url.search("page=1") !="-1" || url.search("page") == "-1") {
+    	document.getElementById("pag-1").classList.add("current-page");
+        document.getElementById("pag-prev").classList.add("disabled");
+        
+        document.getElementById("pag-i...").style.display = "none";
+    	document.getElementById("pag-current-1").style.display = "none";
+    	document.getElementById("pag-current").style.display = "none";
+
+    } else if (url.search("page=2") !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-current-1").style.display = "none";
+        document.getElementById("pag-i...").style.display = "none";
+           
+    } else if (url.search("page=3") !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-i...").style.display = "none";
+        
+    } else if (url.search("page=" + (maxPag-2)) !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-d...").style.display = "none";
+        
+    } else if (url.search("page=" + (maxPag-1)) !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-d...").style.display = "none";
+        document.getElementById("pag-current+1").style.display = "none";
+        
+    } else if (url.search("page=" + maxPag) !="-1") {
+    	document.getElementById("pag-max").classList.add("current-page");
+        document.getElementById("pag-next").classList.add("disabled");
+    	
+    	document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	document.getElementById("pag-current").style.display = "none";
+
+    } else {
+    	document.getElementById("pag-current").classList.add("current-page");
+    } 
+
+    document.getElementById("pages").classList.add("d-flex");
+    document.getElementById("pages").classList.remove("no-display");
+    
+	//Sidebar item
+    if(url.search("TIPO1") != "-1") {
+        
+  	  var t1=document.getElementById("t1");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t1.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t1.classList.forEach(el => aux.classList.add(el));
+        t1.parentNode.replaceChild(aux, t1);
+        
+    } else if(url.search("TIPO2") != "-1") {
+		  
+  	  var t2=document.getElementById("t2");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t2.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t2.classList.forEach(el => aux.classList.add(el));
+        t2.parentNode.replaceChild(aux, t2);
+        
+    } else if(url.search("TIPO3") != "-1") {
+  	  
+		  var t3=document.getElementById("t3");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t3.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t3.classList.forEach(el => aux.classList.add(el));
+        t3.parentNode.replaceChild(aux, t3);
+        
+    } else {
+		  var t=document.getElementById("t");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t.classList.forEach(el => aux.classList.add(el));
+        t.parentNode.replaceChild(aux, t);
+    }
+}
+<!-- Menu Toggle Script -->
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
@@ -91,55 +230,6 @@
     	}
     	
     }
-	//Sidebar item
-      function actualItem() {
-          var url = window.location.href;
-          var aux;
-          
-          if(url.search("TIPO1") != "-1") {
-              
-        	  var t1=document.getElementById("t1");
-              
-              aux = document.createElement('div');
-              aux.innerHTML = t1.innerHTML;
-              aux.classList.add("actual-item");
-              
-              t1.classList.forEach(el => aux.classList.add(el));
-              t1.parentNode.replaceChild(aux, t1);
-              
-          } else if(url.search("TIPO2") != "-1") {
-			  
-        	  var t2=document.getElementById("t2");
-              
-              aux = document.createElement('div');
-              aux.innerHTML = t2.innerHTML;
-              aux.classList.add("actual-item");
-              
-              t2.classList.forEach(el => aux.classList.add(el));
-              t2.parentNode.replaceChild(aux, t2);
-              
-          } else if(url.search("TIPO3") != "-1") {
-        	  
-			  var t3=document.getElementById("t3");
-              
-              aux = document.createElement('div');
-              aux.innerHTML = t3.innerHTML;
-              aux.classList.add("actual-item");
-              
-              t3.classList.forEach(el => aux.classList.add(el));
-              t3.parentNode.replaceChild(aux, t3);
-              
-          } else {
-			  var t=document.getElementById("t");
-              
-              aux = document.createElement('div');
-              aux.innerHTML = t.innerHTML;
-              aux.classList.add("actual-item");
-              
-              t.classList.forEach(el => aux.classList.add(el));
-              t.parentNode.replaceChild(aux, t);
-          }
-      }
 </script>
 </body>
 </html>

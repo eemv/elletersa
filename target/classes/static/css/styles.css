@@ -8,6 +8,10 @@ body {
 	width: 100%;
 }
 
+.no-display {
+	display: none !important;
+}
+
 @charset "UTF-8";
 
 @media screen and (min-width: 992px) {
@@ -229,6 +233,10 @@ to {
 	transition: 0.7s;
 }
 
+.actual-item {
+	cursor: default;
+}
+
 .sidebar-item:hover, .actual-item {
 	background: linear-gradient(to right, #ff00d429, #33ff003b);
 	font-weight: 500;
@@ -236,6 +244,12 @@ to {
 
 .sidebar-item:hover p, .actual-item p {
 	transform: translate(10px);
+}
+
+@media screen and (max-width: 992px) {
+	.sidebar {
+		height: fit-content;
+	}
 }
 
 #sidebar-wrapper {
@@ -277,6 +291,7 @@ to {
 	#wrapper.toggled #sidebar-wrapper {
 		margin-left: -20rem;
 	}
+}
 
 /* Buscador */
 	.search {
@@ -300,6 +315,72 @@ to {
 		):not (.disabled ):active:focus, .show>.search.dropdown-toggle:focus {
 		box-shadow: 0 0 0 .2rem rgba(153, 97, 29, .5)
 	}
+
+/*Paginación*/
+.paginacion {
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: linear-gradient(to right, #ffd7f8, #cdffc2);
+    background-color: white;	
+    border-radius: 1rem;
+    padding-left: 0;
+    list-style: none;
+    height: 38px;
+}
+
+.pag-but {
+	position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    transition: 0.5s;
+}
+
+.pag-but:hover {
+	text-decoration: none;
+    color: black;
+    background-color: rgba(0,0,0,.075);
+}
+
+.pag-prev {
+	border-left: 1px solid black;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+.pag-next {
+	border-right: 1px solid black;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.current-page {
+	position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: black;
+    background-color: rgba(0,0,0,.075);
+    pointer-events: none;
+    cursor: default;
+    font-weight: 500;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+	color: gray;
+}
 
 	/* Add a gray background color and some padding to the footer */
 	footer {
