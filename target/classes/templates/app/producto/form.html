@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6">
 				<form method="post" enctype="multipart/form-data" action="#"
-					th:action="${producto.id != 0} ? @{/app/producto/editar/submit} : @{/productos/producto/nuevo/submit}"
+					th:action="${producto.id != 0} ? @{/app/producto/editar/submit} : @{/producto/nuevo/submit}"
 					th:object="${producto}">
 					<h1
 						th:text="${producto.id != 0} ? '${producto.nombre}' : 'Nuevo producto'">Nuevo
@@ -45,13 +45,18 @@
 							class="form-control" id="precio" placeholder="1.00"
 							th:field="*{precio}" />
 
+					<div class="form-group">
+						<label for="tipo">Tipo</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo"
+							th:field="*{tipo}" />
+					</div>
 					</div>
 					<div class="form-group">
-						<label for="file">Imagen</label> <input id="filebutton"
-							name="file" class="form-control input-file" type="text">
+						<label for="imagen">Imagen</label> <input id="filebutton"
+							name="imagen" class="form-control input-file" type="text">
 					</div>
 
-					
+					<button type=submit>Crear</button>
 					
 				</form>
 						<div sec:authorize="isAuthenticated()">

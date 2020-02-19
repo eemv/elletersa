@@ -3,16 +3,11 @@ package com.eemv.elletersa.controladores;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +23,7 @@ public class ZonaPublicaController {
 	@Autowired
 	ProductoServicio productoServicio;
 	
-	private static final Logger LOGGER=LoggerFactory.getLogger(ZonaPublicaController.class);
+//	private static final Logger LOGGER=LoggerFactory.getLogger(ZonaPublicaController.class);
 	
 	@GetMapping({"/", "/index"})
 	public String index() {
@@ -65,7 +60,7 @@ public class ZonaPublicaController {
 		return "productos";
 	}
 
-	@GetMapping("/producto/{id}")
+	@GetMapping("/productos/{id}")
 	public String showProduct(Model model, @PathVariable Long id) {
 		Producto result = productoServicio.findById(id); 
 		if (result != null) {
