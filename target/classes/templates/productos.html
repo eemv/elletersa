@@ -23,7 +23,11 @@
 <!-- Navbar -->
 <script>HTMLImporter.import("/html/navbar.html");</script>
 
+<div class="d-flex justify-content-between">
 <button class="btn1 btn-filter" id="menu-toggle" onclick="centerProducts()">Categorías</button>
+<a class="btn1 btn-right" href="/producto/nuevo">Añadir producto</a>
+</div>
+
 <div class="d-flex" id="wrapper">
 <!-- Sidebar -->
     <div class="sidebar sidebar-col" id="sidebar-wrapper">
@@ -41,7 +45,7 @@
       <div class="d-inline-grid gradient-box" th:each="producto : ${productos}">
       
       <div>
-      <a th:href="@{/public/producto/{id}(id=${producto.id})}">
+      <a th:href="@{/public/productos/{id}(id=${producto.id})}">
         <img class="product" th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}" alt="product">
       </a>
       </div>
@@ -95,6 +99,7 @@ function jumpPage() {
 
 function afterLoad() {
     var url = window.location.href;
+    var tipo = document.getElementById("tipo").innerHTML;
     var aux;
     //Paginación
     var maxPag = document.getElementById("pag-max").innerHTML;
@@ -127,6 +132,23 @@ function afterLoad() {
     	document.getElementById("pag-current+1").style.display = "none";
         document.getElementById("pag-next").classList.add("disabled");
     	}
+
+    } else if(maxPag === "4") {
+    	
+    	if(url.search("page=1") !="-1" || url.search("page") == "-1") {
+        document.getElementById("pag-d...").onclick = "";
+        document.getElementById("pag-d...").innerHTML = "3";
+        document.getElementById("pag-d...").href = "/public/productos?page=3&tipo=" + tipo;
+    	} else if(url.search("page=2") !="-1") {
+        document.getElementById("pag-d...").style.display = "none";
+    	} else if(url.search("page=3") !="-1") {
+        document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	} else if(url.search("page=4") !="-1" || url.search("page") == "-1") {
+        document.getElementById("pag-i...").onclick = "";
+        document.getElementById("pag-i...").innerHTML = "2";
+        document.getElementById("pag-i...").href = "/public/productos?page=2&tipo=" + tipo;
+        }
 
     }
     
@@ -178,7 +200,7 @@ function afterLoad() {
 	//Sidebar item
     if(url.search("TIPO1") != "-1") {
         
-  	  var t1=document.getElementById("t1");
+  	   var t1=document.getElementById("t1");
         
         aux = document.createElement('div');
         aux.innerHTML = t1.innerHTML;
@@ -219,6 +241,11 @@ function afterLoad() {
         t.classList.forEach(el => aux.classList.add(el));
         t.parentNode.replaceChild(aux, t);
     }
+	
+	//Exclusivo móvil
+	if(isMobile() === true) {
+        	document.getElementById("wrapper").classList.add("justify-content-center");
+    	}
 }
 <!-- Menu Toggle Script -->
    /*  $("#menu-toggle").click(function(e) {
@@ -232,18 +259,22 @@ function centerProducts() {
     	var productos = document.getElementById("productos");
     	var device = productos.style["margin-left"];
     	var filter = document.getElementById("menu-toggle");
-    	
-    	/* console.log(device);
-    	if(productos.style["margin-left"] === "15em" && isMobile() === false) {
-    		productos.style["margin-left"] = "0em";
+    	var conts = filter.classList.contains("btn-filter-disabled");
+    	console.log(device);
+    	if(conts && isMobile() === false) {
         	filter.classList.remove("btn-filter-disabled");
-    	} else if(productos.style["margin-left"] === "15em" && isMobile() === true) {
-    		productos.style["margin-left"] = "5em";
+    	} else if(conts && isMobile() === true) {
         	filter.classList.remove("btn-filter-disabled");
-    	} else {
-    		productos.style["margin-left"] = "15em";
+        	document.getElementById("wrapper").classList.add("justify-content-center");
+        	console.log("mov");
+    	} else if(conts === false && isMobile() === true){
         	filter.classList.add("btn-filter-disabled");
-    	} */
+        	document.getElementById("wrapper").classList.remove("justify-content-center");
+        	console.log("Hola??");
+    	} else {
+        	filter.classList.add("btn-filter-disabled");
+
+    	}
     	
     	if(document.getElementById("sidebar-wrapper").classList.contains("sidebar-col-active") === true) {
     		document.getElementById("sidebar-wrapper").classList.remove("sidebar-col-active");
