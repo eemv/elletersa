@@ -47,7 +47,7 @@
       </div>
       
       <div class="product-title">
-           <h4 class="" th:text="${producto.nombre}"></h4><p th:text="${#numbers.formatCurrency(producto.precio)}">
+           <h4 class="" th:text="${producto.nombre}"></h4><p th:text="${#numbers.formatDecimal(producto.precio,1,2)} + €">
       </div>
 	</div>
 	<br>
