@@ -1,87 +1,200 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 <title>Elletersa - Productos</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="../static/images/favicon.ico" th:href="@{/images/favicon.ico}" type="image/x-icon">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link rel="icon" href="../static/images/favicon.ico"
+	th:href="@{/images/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/styles.css"
+	th:href="@{/css/styles.css}">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 <script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
 </head>
 <body onload="afterLoad()">
-<!-- Banner
+	<!-- Banner
 <div class="text-center">
 	<img src="../static/images/banner.png" th:src="@{/images/banner.png}" class="img-fluid rounded banner" alt="banner">
 </div>
 -->
 
-<!-- Navbar -->
-<script>HTMLImporter.import("/html/navbar.html");</script>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
+		<a class="navbar-brand" href="#"><img class="navbar-logo"
+			src="/images/logo.png"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			onclick="colapse()" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-<div class="d-flex justify-content-between">
-<button class="btn1 btn-filter" id="menu-toggle" onclick="centerProducts()">Categorías</button>
-<a class="btn1 btn-right" href="/producto/nuevo">Añadir producto</a>
-</div>
+		<div class="navbar-collapse nav-col" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Inicio<span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/public/productos">Productos</a></li>
+			</ul>
 
-<div class="d-flex" id="wrapper">
-<!-- Sidebar -->
-    <div class="sidebar sidebar-col" id="sidebar-wrapper">
-      <div class="list-group list-group-flush">
-        <a id="t" href="/public/productos" class="list-group-item list-group-item-action sidebar-item sidebar-heading"><p>Todos</p></a>
-        <a id="t1" href="/public/productos?tipo=TIPO1" class="list-group-item list-group-item-action sidebar-item"><p>Tipo 1</p></a>
-        <a id="t2" href="/public/productos?tipo=TIPO2" class="list-group-item list-group-item-action sidebar-item"><p>Tipo 2</p></a>
-        <a id="t3" href="/public/productos?tipo=TIPO3" class="list-group-item list-group-item-action sidebar-item"><p>Tipo 3</p></a>
-      </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
+			<!-- Autenticado -->
+			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
+			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			 <span class="sr-only">Toggle Dropdown</span>
+			 </a>
+			 <div class="dropdown-menu dropdown-menu-options">
+				<a class="dropdown-item" href="#">Perfil</a>
+				<a class="dropdown-item" href="#">Configuración</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Cerrar sesión</a>
+				</div>
+			</div>
+					
+			<!--No Autenticado -->
+			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareLogin()" class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Iniciar sesión </a>
+				<div class="dropdown-menu dropdown-menu-login">
+					<form class="px-4 py-3" id="loginform" method="POST" action="/auth/login-post" role="form">
+					<div class="form-group">
+						<label for="exampleDropdownFormEmail1">Dirección de correo</label>
+						<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="username">
+						</div>
+						<div class="form-group">
+							<label for="exampleDropdownFormPassword1">Contraseña</label>
+							<input  type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="dropdownCheck"> <label class="form-check-label"
+								for="dropdownCheck"> Recuérdame </label>
+						</div>
+						<button type="submit" class="btn btn-primary">Entrar</button>
+					</form>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">¿Primera vez aquí? ¡Regístrate!</a>
+					<a class="dropdown-item" href="#">¿Has olvidado tu contraseña?</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+<!-- <form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Búsqueda" aria-label="Search">
+				<button class="btn my-2 my-sm-0 search" type="submit">Buscar</button>
+			</form> -->
+	<div class="d-flex justify-content-between">
+		<button class="btn1 btn-filter" id="menu-toggle"
+			onclick="centerProducts()">Categorías</button>
+		<a sec:authorize="isAuthenticated()" class="btn1 btn-right"
+			href="/producto/nuevo">Añadir producto</a>
+	</div>
 
-<!-- Productos -->
-<div class="d-flex justify-content-center wrap margin-center" id="productos">
-      <div class="d-inline-grid gradient-box" th:each="producto : ${productos}">
-      
-      <div>
-      <a th:href="@{/public/productos/{id}(id=${producto.id})}">
-        <img class="product" th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}" alt="product">
-      </a>
-      </div>
-      
-      <div class="product-title">
-           <h4 class="" th:text="${producto.nombre}"></h4><p th:text="${#numbers.formatDecimal(producto.precio,1,2)} + €">
-      </div>
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-col" id="sidebar-wrapper">
+			<div class="list-group list-group-flush">
+				<a id="t" href="/public/productos"
+					class="list-group-item list-group-item-action sidebar-item sidebar-heading"><p>Todos</p></a>
+				<a id="t1" href="/public/productos?tipo=TIPO1"
+					class="list-group-item list-group-item-action sidebar-item"><p>Tipo
+						1</p></a> <a id="t2" href="/public/productos?tipo=TIPO2"
+					class="list-group-item list-group-item-action sidebar-item"><p>Tipo
+						2</p></a> <a id="t3" href="/public/productos?tipo=TIPO3"
+					class="list-group-item list-group-item-action sidebar-item"><p>Tipo
+						3</p></a>
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Productos -->
+		<div class="d-flex justify-content-center wrap margin-center"
+			id="productos">
+			<div class="d-inline-grid gradient-box"
+				th:each="producto : ${productos}">
+
+				<div>
+					<a th:href="@{/public/productos/{id}(id=${producto.id})}"> <img
+						class="product"
+						th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}"
+						alt="product">
+					</a>
+				</div>
+
+				<div class="product-title">
+					<h4 class="" th:text="${producto.nombre}"></h4>
+					<p th:text="${#numbers.formatDecimal(producto.precio,1,2)} + €">
+				</div>
+			</div>
+			<br>
+		</div>
 	</div>
 	<br>
-</div>
-</div>
-<br>	
 
-<!-- Paginación -->
-<div id="pages" class="container justify-content-center no-display">
-	<nav>
-  <ul class="paginacion">
-    <li class="page-item"><a id="pag-prev" class="pag-but pag-prev" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}">Anterior</a></li>
-    
-    <li class="page-item"><a id="pag-1" class="pag-but" th:href="@{?page=1&tipo={tipo}(tipo=${tipo})}">1</a></li>
-    <li class="page-item"><a onclick="jumpPage()" id="pag-i..." class="pag-but pointer">...</a></li>
-    <li class="page-item"><a id="pag-current-1" class="pag-but" th:text="${numPage}" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}"></a></li>
-    <li class="page-item"><a id="pag-current" class="pag-but" th:text="${numPage}+1"></a></li>
-    <li class="page-item"><a id="pag-current+1" class="pag-but" th:text="${numPage}+2" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}"></a></li>
-    <li class="page-item"><a onclick="jumpPage()" id="pag-d..." class="pag-but pointer">...</a></li>
-    <li class="page-item"><a id="pag-max" class="pag-but" th:text="${maxPaginas}" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${maxPaginas})}"></a></li>
-    
-    <li class="page-item"><a id="pag-next" class="pag-but pag-next" th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}">Siguiente</a></li>
-  </ul>
-  </nav>
-</div>
+	<!-- Paginación -->
+	<div id="pages" class="container justify-content-center no-display">
+		<nav>
+			<ul class="paginacion">
+				<li class="page-item"><a id="pag-prev" class="pag-but pag-prev"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}">Anterior</a></li>
 
-<p style="display:none" id="tipo" th:text="${tipo}"></p>
+				<li class="page-item"><a id="pag-1" class="pag-but"
+					th:href="@{?page=1&tipo={tipo}(tipo=${tipo})}">1</a></li>
+				<li class="page-item"><a onclick="jumpPage()" id="pag-i..."
+					class="pag-but pointer">...</a></li>
+				<li class="page-item"><a id="pag-current-1" class="pag-but"
+					th:text="${numPage}"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}"></a></li>
+				<li class="page-item"><a id="pag-current" class="pag-but"
+					th:text="${numPage}+1"></a></li>
+				<li class="page-item"><a id="pag-current+1" class="pag-but"
+					th:text="${numPage}+2"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}"></a></li>
+				<li class="page-item"><a onclick="jumpPage()" id="pag-d..."
+					class="pag-but pointer">...</a></li>
+				<li class="page-item"><a id="pag-max" class="pag-but"
+					th:text="${maxPaginas}"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${maxPaginas})}"></a></li>
+
+				<li class="page-item"><a id="pag-next" class="pag-but pag-next"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}">Siguiente</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<p style="display: none" id="tipo" th:text="${tipo}"></p>
 
 
-<script>
+	<script>
 function jumpPage() {
 	var nextPag;
     var maxPag = document.getElementById("pag-max").innerHTML;
@@ -246,45 +359,7 @@ function afterLoad() {
 	if(isMobile() === true) {
         	document.getElementById("wrapper").classList.add("justify-content-center");
     	}
-}
-<!-- Menu Toggle Script -->
-   /*  $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    }
-    ); */
-    
-
-function centerProducts() {
-    	var productos = document.getElementById("productos");
-    	var device = productos.style["margin-left"];
-    	var filter = document.getElementById("menu-toggle");
-    	var conts = filter.classList.contains("btn-filter-disabled");
-    	console.log(device);
-    	if(conts && isMobile() === false) {
-        	filter.classList.remove("btn-filter-disabled");
-    	} else if(conts && isMobile() === true) {
-        	filter.classList.remove("btn-filter-disabled");
-        	document.getElementById("wrapper").classList.add("justify-content-center");
-        	console.log("mov");
-    	} else if(conts === false && isMobile() === true){
-        	filter.classList.add("btn-filter-disabled");
-        	document.getElementById("wrapper").classList.remove("justify-content-center");
-        	console.log("Hola??");
-    	} else {
-        	filter.classList.add("btn-filter-disabled");
-
-    	}
-    	
-    	if(document.getElementById("sidebar-wrapper").classList.contains("sidebar-col-active") === true) {
-    		document.getElementById("sidebar-wrapper").classList.remove("sidebar-col-active");
-    		console.log("quitar");
-    	} else {
-    		document.getElementById("sidebar-wrapper").classList.add("sidebar-col-active");
-    		console.log("poner");
-    	}
-    	
-    }
+}   
 </script>
 </body>
 </html>

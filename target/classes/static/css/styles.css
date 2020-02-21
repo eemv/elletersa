@@ -146,17 +146,41 @@ body {
 
 }
 
+.dropdown-item.active, .dropdown-item:active {
+    color: #000;
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+.dropdown-item:hover {
+	background: #0000000d;
+    font-weight: 501;
+}
+
+.username {
+    margin-right: -20px;
+}
+
 @media screen and (min-width: 992px) { 
-	.dropdown-menu {
+	.dropdown-menu-login {
 		margin-left: -6em !important;
 	}
 	.dropdown {
 	    border-left: 1px solid;
 	}
+	
+	.dropdown-menu-options {
+	margin-left: -6em !important;
+    border-top: none;
+    background: linear-gradient(to bottom, #d3fcc7, #94cc85);;
+    margin-top: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 5px;
+    }
 }
 
 @media screen and (max-width: 992px) { 
-	.dropdown-menu {
+	.dropdown-menu-login {
 		float: none !important;
 		position: initial !important;
 	}
@@ -167,7 +191,8 @@ body {
 }
 
 .nav-link:hover {
-	color: gray;
+	color: black;
+	text-decoration: underline;
 }
 
 @
