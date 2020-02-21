@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
+import com.eemv.elletersa.modelo.Usuario;
 import com.eemv.elletersa.servicios.ProductoServicio;
 
 @Controller
@@ -25,8 +27,9 @@ public class ZonaPublicaController {
 	
 //	private static final Logger LOGGER=LoggerFactory.getLogger(ZonaPublicaController.class);
 	
-	@GetMapping({"/", "/index"})
-	public String index() {
+	@GetMapping({"/" ,"/index"})
+	public String index(Model model) {
+		model.addAttribute("usuario", new Usuario());
 		return "index";
 	}
 	
@@ -61,7 +64,7 @@ public class ZonaPublicaController {
 			model.addAttribute("productos", result);
 			model.addAttribute("maxPaginas", (int) Math.ceil(maxPaginas));
 		}
-		
+		model.addAttribute("usuario", new Usuario());
 		return "productos";
 	}
 
@@ -71,6 +74,7 @@ public class ZonaPublicaController {
 		if (result != null) {
 			model.addAttribute("producto", result);
 		}
+		model.addAttribute("usuario", new Usuario());
 		return "app/producto/form";
 	}
 	
@@ -81,6 +85,7 @@ public class ZonaPublicaController {
 		if (result != null) {
 			model.addAttribute("productos", result);
 		}
+		model.addAttribute("usuario", new Usuario());
 		return "productos";
 	}
 	

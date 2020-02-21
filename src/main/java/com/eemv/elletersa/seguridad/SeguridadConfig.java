@@ -34,7 +34,7 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
 						"/auth/**","/error")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/auth/login")
 				.defaultSuccessUrl("/public/index", true).loginProcessingUrl("/auth/login-post").permitAll().and()
-				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/public/index");
+				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/public/index").and().csrf().disable();
 
 	}
 }
