@@ -21,7 +21,67 @@
 -->
 
 <!-- Navbar -->
-<script>HTMLImporter.import("/html/navbar.html");</script>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
+		<a class="navbar-brand" href="#"><img class="navbar-logo"
+			src="/images/logo.png"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			onclick="colapse()" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse nav-col" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Inicio<span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/public/productos">Productos</a></li>
+			</ul>
+
+			<!-- Autenticado -->
+			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
+			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			 <span class="sr-only">Toggle Dropdown</span>
+			 </a>
+			 <div class="dropdown-menu dropdown-menu-options">
+				<a class="dropdown-item" href="#">Perfil</a>
+				<a class="dropdown-item" href="#">Configuración</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Cerrar sesión</a>
+				</div>
+			</div>
+					
+			<!--No Autenticado -->
+			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareLogin()" class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Iniciar sesión </a>
+				<div class="dropdown-menu dropdown-menu-login">
+					<form class="px-4 py-3" id="loginform" method="POST" action="/auth/login-post" role="form">
+					<div class="form-group">
+						<label for="exampleDropdownFormEmail1">Dirección de correo</label>
+						<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="username">
+						</div>
+						<div class="form-group">
+							<label for="exampleDropdownFormPassword1">Contraseña</label>
+							<input  type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="dropdownCheck"> <label class="form-check-label"
+								for="dropdownCheck"> Recuérdame </label>
+						</div>
+						<button type="submit" class="btn btn-primary">Entrar</button>
+					</form>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">¿Primera vez aquí? ¡Regístrate!</a>
+					<a class="dropdown-item" href="#">¿Has olvidado tu contraseña?</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	
 	<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
 
 
