@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Elletersa - Productos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../static/images/favicon.ico"
+	th:href="@{/images/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/styles.css"
+	th:href="@{/css/styles.css}">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
+</head>
+<body onload="afterLoad()">
+	<!-- Banner
+<div class="text-center">
+	<img src="../static/images/banner.png" th:src="@{/images/banner.png}" class="img-fluid rounded banner" alt="banner">
+</div>
+-->
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
+		<a class="navbar-brand" href="#"><img class="navbar-logo"
+			src="/images/logo.png"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			onclick="colapse()" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse nav-col" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Inicio<span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/public/productos">Productos</a></li>
+			</ul>
+
+			<!-- Autenticado -->
+			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
+			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			 <span class="sr-only">Toggle Dropdown</span>
+			 </a>
+			 <div class="dropdown-menu dropdown-menu-options">
+				<a class="dropdown-item" href="#">Perfil</a>
+				<a class="dropdown-item" href="#">Configuración</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Cerrar sesión</a>
+				</div>
+			</div>
+					
+			<!--No Autenticado -->
+			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareLogin()" class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Iniciar sesión </a>
+				<div class="dropdown-menu dropdown-menu-login">
+					<form class="px-4 py-3" id="loginform" method="POST" action="/auth/login-post" role="form">
+					<div class="form-group">
+						<label for="exampleDropdownFormEmail1">Dirección de correo</label>
+						<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="username">
+						</div>
+						<div class="form-group">
+							<label for="exampleDropdownFormPassword1">Contraseña</label>
+							<input  type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="dropdownCheck"> <label class="form-check-label"
+								for="dropdownCheck"> Recuérdame </label>
+						</div>
+						<button type="submit" class="btn btn-primary">Entrar</button>
+					</form>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">¿Primera vez aquí? ¡Regístrate!</a>
+					<a class="dropdown-item" href="#">¿Has olvidado tu contraseña?</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+<!-- <form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Búsqueda" aria-label="Search">
+				<button class="btn my-2 my-sm-0 search" type="submit">Buscar</button>
+			</form> -->
+	<div class="d-flex justify-content-between">
+		<button class="btn1 btn-filter" id="menu-toggle"
+			onclick="centerProducts()">Categorías</button>
+		<a sec:authorize="isAuthenticated()" class="btn1 btn-right"
+			href="/tratamiento/nuevo">Añadir tratamiento</a>
+	</div>
+
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-col" id="sidebar-wrapper">
+			<div class="list-group list-group-flush">
+				<a id="t" href="/public/tratamientos"
+					class="list-group-item list-group-item-action sidebar-item sidebar-heading"><p>Todos</p></a>
+				<a id="t1" href="/public/tratamientos?tipo=FACIAL"
+					class="list-group-item list-group-item-action sidebar-item"><p>Facial
+						</p></a> <a id="t2" href="/public/tratamientos?tipo=CORPORAL"
+					class="list-group-item list-group-item-action sidebar-item"><p>Corporal
+						</p></a> 
+			</div>
+		</div>
+		<!-- /#sidebar-wrapper -->
+
+		<!-- Productos -->
+		<div class="d-flex justify-content-center wrap margin-center"
+			id="productos">
+			<div class="d-inline-grid gradient-box"
+				th:each="tratamiento : ${tratamientos}">
+
+				<div>
+					<a th:href="@{/public/tratamientos/{id}(id=${tratamiento.id})}"> <img
+						class="tratamiento"
+						th:src="${#strings.isEmpty(tratamiento.imagen)} ? 'http://placehold.it/300x200' : ${tratamiento.imagen}"
+						alt="tratamiento">
+					</a>
+				</div>
+
+				<div class="tratamiento-title">
+					<h4 class="" th:text="${tratamiento.nombre}"></h4>
+					<p th:text="${#numbers.formatDecimal(tratamiento.precioSesion,1,2)} + €">
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+	<br>
+
+	<!-- Paginación -->
+	<div id="pages" class="container justify-content-center no-display">
+		<nav>
+			<ul class="paginacion">
+				<li class="page-item"><a id="pag-prev" class="pag-but pag-prev"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}">Anterior</a></li>
+
+				<li class="page-item"><a id="pag-1" class="pag-but"
+					th:href="@{?page=1&tipo={tipo}(tipo=${tipo})}">1</a></li>
+				<li class="page-item"><a onclick="jumpPage()" id="pag-i..."
+					class="pag-but pointer">...</a></li>
+				<li class="page-item"><a id="pag-current-1" class="pag-but"
+					th:text="${numPage}"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage})}"></a></li>
+				<li class="page-item"><a id="pag-current" class="pag-but"
+					th:text="${numPage}+1"></a></li>
+				<li class="page-item"><a id="pag-current+1" class="pag-but"
+					th:text="${numPage}+2"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}"></a></li>
+				<li class="page-item"><a onclick="jumpPage()" id="pag-d..."
+					class="pag-but pointer">...</a></li>
+				<li class="page-item"><a id="pag-max" class="pag-but"
+					th:text="${maxPaginas}"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${maxPaginas})}"></a></li>
+
+				<li class="page-item"><a id="pag-next" class="pag-but pag-next"
+					th:href="@{?page={page}&tipo={tipo}(tipo=${tipo},page=${numPage}+2)}">Siguiente</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<p style="display: none" id="tipo" th:text="${tipo}"></p>
+
+
+	<script>
+function jumpPage() {
+	var nextPag;
+    var maxPag = document.getElementById("pag-max").innerHTML;
+    var tipo = document.getElementById("tipo").innerHTML;
+	var input = prompt("Indica a qué página quieres acceder: (entre 1 y " + maxPag + ")");
+
+	if(input>= "1" && input<=maxPag) {
+	window.location.href = "/public/tratamientos?page=" + input + "&tipo=" + tipo;
+	} else if(input == null || input == "") {
+		
+	} else {
+		alert("¡Eso no es una página válida!");
+	} 
+}
+
+function afterLoad() {
+    var url = window.location.href;
+    var tipo = document.getElementById("tipo").innerHTML;
+    var aux;
+    //Paginación
+    var maxPag = document.getElementById("pag-max").innerHTML;
+    
+    if(maxPag === "1") {
+        document.getElementById("pag-i...").style.display = "none";
+        document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current-1").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	document.getElementById("pag-max").style.display = "none";
+    	
+        document.getElementById("pag-next").classList.add("disabled");
+    } else if(maxPag === "2") {
+        document.getElementById("pag-i...").style.display = "none";
+        document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current-1").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	if(url.search("page=2") !="-1") {
+        document.getElementById("pag-max").style.display = "none";
+        document.getElementById("pag-next").classList.add("disabled");
+    	}
+
+    } else if(maxPag === "3") {
+        document.getElementById("pag-i...").style.display = "none";
+        document.getElementById("pag-d...").style.display = "none";
+    	if(url.search("page=2") !="-1") {
+        document.getElementById("pag-max").style.display = "none";
+    	} else if(url.search("page=3") !="-1") {
+        document.getElementById("pag-max").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+        document.getElementById("pag-next").classList.add("disabled");
+    	}
+
+    } else if(maxPag === "4") {
+    	
+    	if(url.search("page=1") !="-1" || url.search("page") == "-1") {
+        document.getElementById("pag-d...").onclick = "";
+        document.getElementById("pag-d...").innerHTML = "3";
+        document.getElementById("pag-d...").href = "/public/tratamientos?page=3&tipo=" + tipo;
+    	} else if(url.search("page=2") !="-1") {
+        document.getElementById("pag-d...").style.display = "none";
+    	} else if(url.search("page=3") !="-1") {
+        document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	} else if(url.search("page=4") !="-1" || url.search("page") == "-1") {
+        document.getElementById("pag-i...").onclick = "";
+        document.getElementById("pag-i...").innerHTML = "2";
+        document.getElementById("pag-i...").href = "/public/tratamientos?page=2&tipo=" + tipo;
+        }
+
+    }
+    
+    if(url.search("page=1") !="-1" || url.search("page") == "-1") {
+    	document.getElementById("pag-1").classList.add("current-page");
+        document.getElementById("pag-prev").classList.add("disabled");
+        
+        document.getElementById("pag-i...").style.display = "none";
+    	document.getElementById("pag-current-1").style.display = "none";
+    	document.getElementById("pag-current").style.display = "none";
+
+    } else if (url.search("page=2") !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-current-1").style.display = "none";
+        document.getElementById("pag-i...").style.display = "none";
+           
+    } else if (url.search("page=3") !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-i...").style.display = "none";
+        
+    } else if (url.search("page=" + (maxPag-2)) !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-d...").style.display = "none";
+        
+    } else if (url.search("page=" + (maxPag-1)) !="-1") {
+    	document.getElementById("pag-current").classList.add("current-page");
+    	
+        document.getElementById("pag-d...").style.display = "none";
+        document.getElementById("pag-current+1").style.display = "none";
+        
+    } else if (url.search("page=" + maxPag) !="-1") {
+    	document.getElementById("pag-max").classList.add("current-page");
+        document.getElementById("pag-next").classList.add("disabled");
+    	
+    	document.getElementById("pag-d...").style.display = "none";
+    	document.getElementById("pag-current+1").style.display = "none";
+    	document.getElementById("pag-current").style.display = "none";
+
+    } else {
+    	document.getElementById("pag-current").classList.add("current-page");
+    } 
+
+    document.getElementById("pages").classList.add("d-flex");
+    document.getElementById("pages").classList.remove("no-display");
+    
+	//Sidebar item
+    if(url.search("FACIAL") != "-1") {
+        
+  	   var t1=document.getElementById("t1");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t1.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t1.classList.forEach(el => aux.classList.add(el));
+        t1.parentNode.replaceChild(aux, t1);
+        
+    } else if(url.search("CORPORAL") != "-1") {
+		  
+  	  var t2=document.getElementById("t2");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t2.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t2.classList.forEach(el => aux.classList.add(el));
+        t2.parentNode.replaceChild(aux, t2);
+        
+    } else {
+		  var t=document.getElementById("t");
+        
+        aux = document.createElement('div');
+        aux.innerHTML = t.innerHTML;
+        aux.classList.add("actual-item");
+        
+        t.classList.forEach(el => aux.classList.add(el));
+        t.parentNode.replaceChild(aux, t);
+    }
+	
+	//Exclusivo móvil
+	if(isMobile() === true) {
+        	document.getElementById("wrapper").classList.add("justify-content-center");
+    	}
+}   
+</script>
+</body>
+</html>
