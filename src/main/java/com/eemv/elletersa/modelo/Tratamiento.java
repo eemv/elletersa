@@ -1,7 +1,9 @@
 package com.eemv.elletersa.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -58,5 +60,7 @@ public class Tratamiento {
 	@NonNull
 	private TIPO_TRATAMIENTO tipo;
 	
-	private List<Producto> productosRecomendados;
+	@NonNull
+	@ElementCollection
+	private List<Producto> productosRecomendados = new ArrayList<>();
 }

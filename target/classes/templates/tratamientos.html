@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<title>Elletersa - Productos</title>
+<title>Elletersa - Tratamientos</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../static/images/favicon.ico"
@@ -134,15 +134,15 @@
 		</div>
 		<!-- /#sidebar-wrapper -->
 
-		<!-- Productos -->
+		<!-- Tratamientos -->
 		<div class="d-flex justify-content-center wrap margin-center"
-			id="productos">
+			id="products">
 			<div class="d-inline-grid gradient-box"
 				th:each="tratamiento : ${tratamientos}">
 
 				<div>
 					<a th:href="@{/public/tratamientos/{id}(id=${tratamiento.id})}"> <img
-						class="tratamiento"
+						class="product"
 						th:src="${#strings.isEmpty(tratamiento.imagen)} ? 'http://placehold.it/300x200' : ${tratamiento.imagen}"
 						alt="tratamiento">
 					</a>

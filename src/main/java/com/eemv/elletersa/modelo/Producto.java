@@ -1,5 +1,7 @@
 package com.eemv.elletersa.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +16,15 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -29,25 +34,29 @@ public class Producto {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull
 	@NotBlank
+	@NonNull
 	private String nombre; 
 	
 	@PositiveOrZero
-	private float precio;
+	@NonNull
+	private Double precio;
 	
+	@NonNull
 	private String imagen; 
 	
-	@NotNull
 	@NotBlank
+	@NonNull
 	private String descripcion; 
 	
-	@NotNull
 	@NotBlank
+	@NonNull
 	private String componentes; 
 	
+	@NonNull
 	private TIPO_PIEL tipoPiel;
 	
+	@NonNull
 	private TIPO_PRODUCTO tipo;
 	
 
