@@ -63,7 +63,7 @@ body {
 	/* !importanté */
 	border-radius: inherit;
 	/* !importanté */
-	background: linear-gradient(to right, #ff00d440, #33ff0063);
+	background: linear-gradient(to right, #ff00d440, #fff4fd);
 }
 
 .gradient-box:hover {
@@ -73,15 +73,15 @@ body {
 	transform: rotate(2deg);
 }
 
-.product {
+.object {
 	height: 240px;
 	width: 240px;
 	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
 }
 
-.product-title {
-	border-image: linear-gradient(to right, #ff00d440, #33ff0063);
+.object-title {
+	border-image: linear-gradient(to right, #ff00d440, #fff4fd);
 	border-image-slice: 1;
 	border-top: 4px solid;
 	border-bottom: 0px;
@@ -98,7 +98,7 @@ body {
 	border-bottom: 1px solid;
 	height: 65px;
 	font-size: large;
-	background: linear-gradient(to right, #ff00d429, #33ff003b);
+	background: linear-gradient(to right, #ff00d429, #fff4fd69);
 	transition: 0.5s;
 }
 
@@ -172,7 +172,7 @@ body {
 	.dropdown-menu-options {
 	margin-left: -6em !important;
     border-top: none;
-    background: linear-gradient(to bottom, #d3fcc7, #94cc85);;
+    background: linear-gradient(to bottom, #fff8fe, #ffe8fb);
     margin-top: 10px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 5px;
@@ -246,7 +246,7 @@ to {
     padding-left: 20px;
 	text-decoration: underline;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	background: linear-gradient(to right, #fcb5effc, #fff8fe);
     border-color: black;
     font-weight: 501;
     color: #212529 !important;
@@ -254,7 +254,7 @@ to {
 }
 
 .btn-filter:hover, .btn-filter-disabled {
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
 	text-decoration: none;
 	}
 
@@ -271,7 +271,7 @@ to {
 	border-radius: 15px;
 	text-decoration: underline;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	background: linear-gradient(to right, #fcb5effc, #fff8fe);
     border-color: black;
     font-weight: 501;
     color: #212529 !important;
@@ -279,7 +279,7 @@ to {
 }
 
 .btn-right:hover, .btn-right-disabled {
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
 	text-decoration: none;
 	}
 }
@@ -292,7 +292,7 @@ to {
     border-bottom-left-radius: 0px;
 	text-decoration: none;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
     border-color: black;
     font-weight: 500;
     color: #212529 !important;
@@ -300,7 +300,7 @@ to {
 }
 
 .btn-filter-disabled {
-	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	background: linear-gradient(to right, #fcb5effc, #fff8fe);
 	text-decoration: underline;
 	}
 
@@ -314,7 +314,7 @@ to {
     border-bottom-right-radius: 0px;
 	text-decoration: none;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
     border-color: black;
     font-weight: 500;
     color: #212529 !important;
@@ -329,7 +329,7 @@ to {
 	border-left: none;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
-	background: linear-gradient(to right, #ffd6f8, #e0f1d6);
+	background: linear-gradient(to right, #ffd6f8, #fff8fe);
 	transition: 0.5s;
 }
 
@@ -377,7 +377,7 @@ to {
 }
 
 .sidebar-item:hover, .actual-item {
-	background: linear-gradient(to right, #ff00d429, #33ff003b);
+	background: linear-gradient(to right, #ff00d429, #fff0);
 	font-weight: 500;
 }
 
@@ -457,7 +457,7 @@ to {
 	display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    background: linear-gradient(to right, #ffd7f8, #cdffc2);
+    background: linear-gradient(to right, #ffbdf4, #fff);
     background-color: white;	
     border-radius: 1rem;
     padding-left: 0;
