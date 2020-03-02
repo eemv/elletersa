@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Elletersa - Tratamientos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../static/images/favicon.ico"
+	th:href="@{/images/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/styles.css"
+	th:href="@{/css/styles.css}">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
+</head>
+<body onload="actualItem()">
+<!-- Banner
+<div class="text-center">
+	<img src="../static/images/banner.png" th:src="@{/images/banner.png}" class="img-fluid rounded banner" alt="banner">
+</div>
+-->
+
+<!-- Navbar -->
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
+		<a class="navbar-brand" href="#"><img class="navbar-logo"
+			src="/images/logo.png"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			onclick="colapse()" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse nav-col" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="/">Inicio<span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/public/productos">Productos</a></li>
+			</ul>
+
+			<!-- Autenticado -->
+			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
+			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			 <span class="sr-only">Toggle Dropdown</span>
+			 </a>
+			 <div class="dropdown-menu dropdown-menu-options">
+				<a class="dropdown-item" href="#">Perfil</a>
+				<a class="dropdown-item" href="#">Configuración</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="#">Cerrar sesión</a>
+				</div>
+			</div>
+					
+			<!--No Autenticado -->
+			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareLogin()" class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> Iniciar sesión </a>
+				<div class="dropdown-menu dropdown-menu-login">
+					<form class="px-4 py-3" id="loginform" method="POST" action="/auth/login-post" role="form">
+					<div class="form-group">
+						<label for="exampleDropdownFormEmail1">Dirección de correo</label>
+						<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="username">
+						</div>
+						<div class="form-group">
+							<label for="exampleDropdownFormPassword1">Contraseña</label>
+							<input  type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+						</div>
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="dropdownCheck"> <label class="form-check-label"
+								for="dropdownCheck"> Recuérdame </label>
+						</div>
+						<button type="submit" class="btn btn-primary">Entrar</button>
+					</form>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">¿Primera vez aquí? ¡Regístrate!</a>
+					<a class="dropdown-item" href="#">¿Has olvidado tu contraseña?</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+	<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<form method="post" enctype="multipart/form-data" action="#"
+					th:action="${producto.id != 0} ? @{/app/producto/editar/submit} : @{/producto/nuevo/submit}"
+					th:object="${producto}">
+					<h1
+						th:text="${producto.id != 0} ? *{nombre} : 'Nuevo producto'">Nuevo
+						producto</h1>
+						
+					<input type="hidden" id="id" name="id" th:field="*{id}" />
+					<div class="form-group">
+						<label for="nombre">Nombre</label> <input type="text"
+							class="form-control" id="nombre" placeholder="Nombre"
+							th:field="*{nombre}" />
+					</div>
+					<div class="form-group">
+						<label for="precio">Precio</label> <input type="number" step="0.01"
+							class="form-control" id="precio" placeholder="1.00"
+							th:field="*{precio}" />
+
+					<div class="form-group">
+						<label for="tipo">Tipo</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo"
+							th:field="*{tipo}" />
+					</div>
+					</div>
+					<div class="form-group">
+						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
+							name="imagen" class="form-control input-file" type="text">
+					</div>
+
+					<button th:class="${producto.id != 0} ? 'no-display' : 'btn'" th:type="${producto.id != 0} ? '' : 'submit'">Crear</button>
+					
+				</form>
+			<div sec:authorize="isAuthenticated()">
+			<a th:href="@{/productos/{id}/eliminar(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
+									<span class="glyphicon glyphicon-remove" ></span> Eliminar
+								</a>
+								</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
