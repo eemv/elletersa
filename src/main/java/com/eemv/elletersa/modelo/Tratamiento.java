@@ -1,16 +1,17 @@
 package com.eemv.elletersa.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-
-import org.springframework.beans.factory.annotation.Required;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -29,36 +30,37 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Producto {
+public class Tratamiento {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NonNull
 	@NotBlank
-	@NonNull
 	private String nombre; 
-	
-	@PositiveOrZero
-	@NonNull
-	private Double precio;
 	
 	@NonNull
 	private String imagen; 
 	
-	@NotBlank
 	@NonNull
+	@NotBlank
 	private String descripcion; 
 	
-	@NotBlank
+	@Positive
 	@NonNull
-	private String componentes; 
+	private Integer numSesiones;
+	
+	@PositiveOrZero
+	@NonNull
+	private Double precioSesion;
 	
 	@NonNull
-	private TIPO_PIEL tipoPiel;
+	private Integer minutosSesion;
 	
 	@NonNull
-	private TIPO_PRODUCTO tipo;
+	private TIPO_TRATAMIENTO tipo;
 	
-
-
+	@NonNull
+	@ElementCollection
+	private List<Producto> productosRecomendados = new ArrayList<>();
 }
