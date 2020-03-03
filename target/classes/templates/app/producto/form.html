@@ -156,7 +156,7 @@
 					
 				</form>
 			<div sec:authorize="isAuthenticated()">
-			<a th:href="@{/productos/{id}/eliminar(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
+			<a th:href="@{/producto/eliminar/{id}(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
 									<span class="glyphicon glyphicon-remove" ></span> Eliminar
 								</a>
 								</div>
