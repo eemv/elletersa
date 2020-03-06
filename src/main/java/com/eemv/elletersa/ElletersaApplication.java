@@ -89,11 +89,16 @@ public class ElletersaApplication {
 					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 					 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL);
 			 
+			 Producto p1 = new Producto("Crema9", 234.54,"https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/66614576_2302466366669114_1889631012892180480_n.jpg?_nc_cat=103&_nc_ohc=x_qXryjeUCwAX8UZ3__&_nc_ht=scontent-mad1-1.xx&oh=0222de2ad77dc45f2d13248aee63ad3e&oe=5EF9C474",
+					 "Lorem ipso", "Estos y aquellos", TIPO_PIEL.CASTIGADAS, TIPO_PRODUCTO.COMPLEMENTARIO);
+			 
 			 List<Tratamiento> TratamientosList1 = new ArrayList<Tratamiento>();
+			 List<Producto> ProductosList1 = new ArrayList<>();
+			 ProductosList1.add(p1);
 			 TratamientosList1.add(t1);
 			 TratamientosList1.add(t2);
 			 
-			 Pack pack1 =  new Pack("Pack1",new ArrayList<>(),TratamientosList1, "Descripcion", 45.00,"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg");
+			 Pack pack1 =  new Pack("Pack1",ProductosList1,TratamientosList1, "Descripcion", 45.00,"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg");
 			 
 			 packServicio.insertar(pack1);
 		};
