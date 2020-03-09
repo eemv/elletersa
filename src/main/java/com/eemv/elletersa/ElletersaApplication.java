@@ -2,21 +2,25 @@ package com.eemv.elletersa;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-
+import com.eemv.elletersa.modelo.Pack;
 import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PIEL;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
 import com.eemv.elletersa.modelo.TIPO_TRATAMIENTO;
 import com.eemv.elletersa.modelo.Tratamiento;
 import com.eemv.elletersa.modelo.Usuario;
+import com.eemv.elletersa.repositorios.PackRepository;
 import com.eemv.elletersa.repositorios.ProductoRepository;
 import com.eemv.elletersa.repositorios.TratamientoRepository;
+import com.eemv.elletersa.servicios.PackServicio;
 import com.eemv.elletersa.servicios.UsuarioServicio;
 
 
@@ -39,13 +43,14 @@ public class ElletersaApplication {
 
 	
 	@Bean
-	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository, TratamientoRepository tratamientoRepository) {
+	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository, TratamientoRepository tratamientoRepository,
+			PackServicio packServicio) {
 		return args -> {
 
 			Usuario usuario = new Usuario("Luis Miguel", "López Magaña", null, "luismi.lopez@openwebinars.net", "luismi");
 			 usuarioServicio.registrar(usuario);
 
-			
+			 
 			productoRepository.saveAll( Arrays.asList(new Producto("Crema 1", 100.00,"https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/82371178_2457842064464876_158547300392632320_n.jpg?_nc_cat=100&_nc_ohc=KK_EnnnU6IkAX-yw9Jk&_nc_ht=scontent-mad1-1.xx&oh=132391aa8417c44feff129d9524d5448&oe=5EBB9F39",
 					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
 					new Producto("Crema 2", 2500.00,
@@ -75,6 +80,27 @@ public class ElletersaApplication {
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 							 , 3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL)
 					 ));
+			 
+			 Tratamiento t1 = new Tratamiento("Tratamiento 6", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
+					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+					 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL);
+			 
+			 Tratamiento t2 = new Tratamiento("Tratamiento 7", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
+					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+					 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL);
+			 
+			 Producto p1 = new Producto("Crema9", 234.54,"https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/66614576_2302466366669114_1889631012892180480_n.jpg?_nc_cat=103&_nc_ohc=x_qXryjeUCwAX8UZ3__&_nc_ht=scontent-mad1-1.xx&oh=0222de2ad77dc45f2d13248aee63ad3e&oe=5EF9C474",
+					 "Lorem ipso", "Estos y aquellos", TIPO_PIEL.CASTIGADAS, TIPO_PRODUCTO.COMPLEMENTARIO);
+			 
+			 List<Tratamiento> TratamientosList1 = new ArrayList<Tratamiento>();
+			 List<Producto> ProductosList1 = new ArrayList<>();
+			 ProductosList1.add(p1);
+			 TratamientosList1.add(t1);
+			 TratamientosList1.add(t2);
+			 
+			 Pack pack1 =  new Pack("Pack1",ProductosList1,TratamientosList1, "Descripcion", 45.00,"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg");
+			 
+			 packServicio.insertar(pack1);
 		};
 	}	
 }
