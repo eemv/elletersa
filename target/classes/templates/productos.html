@@ -192,6 +192,7 @@
 	</div>
 
 	<p style="display: none" id="tipo" th:text="${tipo}"></p>
+	<p style="display: none" id="pagina" th:text="${numPage}"></p>
 
 	<script>
 function jumpPage() {
@@ -212,6 +213,9 @@ function jumpPage() {
 function afterLoad() {
     var url = window.location.href;
     var tipo = document.getElementById("tipo").innerHTML;
+    var pag = document.getElementById("pagina").innerHTML;
+    var pagina = parseInt(pag) + 1;
+    console.log(pagina);
     var aux;
     //Paginación
     var maxPag = document.getElementById("pag-max").innerHTML;
@@ -261,10 +265,9 @@ function afterLoad() {
         document.getElementById("pag-i...").innerHTML = "2";
         document.getElementById("pag-i...").href = "/public/productos?page=2&tipo=" + tipo;
         }
-
     }
     
-    if(url.search("page=1") !="-1" || url.search("page") == "-1") {
+    if(pagina == "1" || url.search("page") == "-1") {
     	document.getElementById("pag-1").classList.add("current-page");
         document.getElementById("pag-prev").classList.add("disabled");
         
@@ -272,29 +275,29 @@ function afterLoad() {
     	document.getElementById("pag-current-1").style.display = "none";
     	document.getElementById("pag-current").style.display = "none";
 
-    } else if (url.search("page=2") !="-1") {
+    } else if (pagina == "2") {
     	document.getElementById("pag-current").classList.add("current-page");
     	
         document.getElementById("pag-current-1").style.display = "none";
         document.getElementById("pag-i...").style.display = "none";
            
-    } else if (url.search("page=3") !="-1") {
+    } else if (pagina == "3") {
     	document.getElementById("pag-current").classList.add("current-page");
     	
         document.getElementById("pag-i...").style.display = "none";
         
-    } else if (url.search("page=" + (maxPag-2)) !="-1") {
+    } else if (pagina == (maxPag-2)) {
     	document.getElementById("pag-current").classList.add("current-page");
     	
         document.getElementById("pag-d...").style.display = "none";
         
-    } else if (url.search("page=" + (maxPag-1)) !="-1") {
+    } else if (pagina == (maxPag-1)) {
     	document.getElementById("pag-current").classList.add("current-page");
     	
         document.getElementById("pag-d...").style.display = "none";
         document.getElementById("pag-current+1").style.display = "none";
         
-    } else if (url.search("page=" + maxPag) !="-1") {
+    } else if (pagina == maxPag) {
     	document.getElementById("pag-max").classList.add("current-page");
         document.getElementById("pag-next").classList.add("disabled");
     	

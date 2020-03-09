@@ -16,6 +16,10 @@ body {
 	display: none !important;
 }
 
+.text-center {
+	text-align: center;
+}
+
 @charset "UTF-8";
 
 @media screen and (min-width: 992px) {
@@ -542,17 +546,46 @@ to {
 		cursor: pointer;
 	}
 
-	/* Estilos para la factura */
-	.invoice-title h2, .invoice-title h3 {
-		display: inline-block;
-	}
-	.invoice-body .table>tbody>tr>.no-line {
-		border-top: none;
-	}
-	.invoice-body .table>thead>tr>.no-line {
-		border-bottom: none;
-	}
-	.invoice-body .table>tbody>tr>.thick-line {
-		border-top: 2px solid;
-	}
+/*Shows*/
+@media ( min-width : 1200px) {
+.show-product {
+}
+
+.show1 {
+	margin-left: -15em;
+}
+
+.show2 {
+    margin-right: 25em;
+}
+
+.img-show {
+	height: 240px;
+	width: 240px;
+	border-radius: 1em;
+}
+
+}
+
+@media ( max-width : 1200px) {
+.show-product {
+	width: 100%
+}
+
+.precio-show {
+	transform: matrix(0.866,0.5,-0.5,0.866,-28,-32);
+    width: 36%;
+    height: 40px;
+    margin-bottom: -20px;
+    text-align: center;
+    font-weight: 700;
+    background: blanchedalmond;
+}
+
+.img-show {
+	height: 240px;
+	width: 240px;
+	border-radius: 1em;
+}
+
 }
