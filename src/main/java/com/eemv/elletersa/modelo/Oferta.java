@@ -2,16 +2,22 @@ package com.eemv.elletersa.modelo;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-import org.springframework.beans.factory.annotation.Required;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -30,38 +36,25 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Producto {
+//@Check(constraints = "tratamiento IS NOT NULL AND producto IS NULL OR" + "tratamiento IS NULL AND producto IS NOT NULL")
+public class Oferta {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank
-	@NonNull
-	private String nombre; 
+	@Valid
+	@ManyToOne(cascade = CascadeType.ALL) 
+	private Producto producto;
+
+	@Valid
+	@ManyToOne(cascade = CascadeType.ALL) 
+	private Tratamiento tratamiento;
 	
+	@NonNull
+	@NotBlank
+	private String descripcion;
+	
+	@NonNull
 	@PositiveOrZero
-	@NonNull
-	private Double precio;
-	
-	@NonNull
-	private String imagen; 
-	
-	@NotBlank
-	@NonNull
-	private String descripcion; 
-	
-	@NotBlank
-	@NonNull
-	private String componentes; 
-	
-	@NonNull
-	private TIPO_PIEL tipoPiel;
-	
-	@NonNull
-	private TIPO_PRODUCTO tipo;
-	
-//	@ManyToMany
-//	private List<Pack> packs;
-
-
+	private Double nuevoPrecio;
 }
