@@ -2,7 +2,7 @@
 
 body {
 	overflow-x: hidden; /*Sidebar*/
-	background-image: url(https://media.istockphoto.com/vectors/seamless-pattern-with-cute-gray-flowers-seamless-pattern-can-be-used-vector-id1157388049);
+	background-image: url(../images/background.png);
 }
 .banner {
 	width: 100%;
@@ -132,10 +132,6 @@ body {
     box-shadow: none;
 }
 
-.login-height {
-    padding-bottom: 32em !important;
-}
-
 @media screen and (max-width: 992px) {
 .nav-col {
   visibility: hidden;
@@ -161,23 +157,39 @@ body {
     font-weight: 501;
 }
 
+
+.login-height {
+	    padding-bottom: 34em !important;
+	}
+	
+.submenu-height {
+	    padding-bottom: 21em !important;
+	}
+
 .username {
     margin-right: -20px;
 }
 
 @media screen and (min-width: 992px) { 
 	.dropdown-menu-login {
-		margin-left: -6em !important;
+	margin-left: -5.8em !important;
+    border-top: none;
+    background: linear-gradient(to bottom, #fff8fe, #ffe8fb);
+    margin-top: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 5px;
 	}
+	
 	.dropdown {
 	    border-left: 1px solid;
 	}
 	
 	.dropdown-menu-options {
-	margin-left: -6em !important;
+	right: 0px;
+	left:initial;
     border-top: none;
     background: linear-gradient(to bottom, #fff8fe, #ffe8fb);
-    margin-top: 10px;
+    margin-top: -1px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 5px;
     }
@@ -187,6 +199,13 @@ body {
 	.dropdown-menu-login {
 		float: none !important;
 		position: initial !important;
+    	background: #ffffff6b;
+	}
+	
+	.dropdown-menu-options {
+		float: none !important;
+		position: initial !important;
+    	background: #ffffff6b;
 	}
 }
 
@@ -573,7 +592,7 @@ to {
 }
 
 .precio-show {
-	transform: matrix(0.866,0.5,-0.5,0.866,-28,-32);
+	transform: matrix(0.866,0.5,-0.5,0.866,-31,-40);
     width: 36%;
     height: 40px;
     margin-bottom: -20px;

@@ -61,18 +61,17 @@
 			</ul>
 
 			<!-- Autenticado -->
-			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
-			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			 <span class="sr-only">Toggle Dropdown</span>
-			 </a>
-			 <div class="dropdown-menu dropdown-menu-options">
+			<div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareSubmenu()" sec:authentication="name" class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"></a>
+			</div>
+			 <div class="dropdown-menu dropdown-menu-options" id="submenu">
 				<a class="dropdown-item" href="#">Perfil</a>
 				<a class="dropdown-item" href="#">Configuración</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/auth/logout">Cerrar sesión</a>
 				</div>
-			</div>
 					
 			<!--No Autenticado -->
 			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
