@@ -39,7 +39,7 @@
 	crossorigin="anonymous"></script>
 <script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
 </head>
-<body onload="actualItem()">
+<body onload="afterLoad()">
 <!-- Banner
 <div class="text-center">
 	<img src="../static/images/banner.png" th:src="@{/images/banner.png}" class="img-fluid rounded banner" alt="banner">
@@ -47,7 +47,6 @@
 -->
 
 <!-- Navbar -->
-	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
 		<a class="navbar-brand" href="#"><img class="navbar-logo"
 			src="/images/logo.png"></a>
@@ -63,21 +62,22 @@
 						class="sr-only">(current)</span></a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/public/productos">Productos</a></li>
+				<li class="nav-item"><a class="nav-link"
+				href="/public/tratamientos">Tratamientos</a></li>
 			</ul>
 
 			<!-- Autenticado -->
-			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
-			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			 <span class="sr-only">Toggle Dropdown</span>
-			 </a>
-			 <div class="dropdown-menu dropdown-menu-options">
+			<div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareSubmenu()" sec:authentication="name" class="nav-link dropdown-toggle"
+					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"></a>
+			</div>
+			 <div class="dropdown-menu dropdown-menu-options" id="submenu">
 				<a class="dropdown-item" href="#">Perfil</a>
 				<a class="dropdown-item" href="#">Configuración</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/auth/logout">Cerrar sesión</a>
 				</div>
-			</div>
 					
 			<!--No Autenticado -->
 			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
@@ -109,28 +109,39 @@
 	</nav>
 	
 	<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-offset-3 col-md-6">
+	<div th:switch="${producto.id}" class="container col-md-offset-3 col-md-6">
+	<!--CREATE-->
+	<div th:case="0">
 				<form method="post" enctype="multipart/form-data" action="#"
 					th:action="${producto.id != 0} ? @{/app/producto/editar/submit} : @{/producto/nuevo/submit}"
 					th:object="${producto}">
-					<h1
+					<h1 id="nombreh1"
 						th:text="${producto.id != 0} ? *{nombre} : 'Nuevo producto'">Nuevo
 						producto</h1>
-						
+					<br>
 					<input type="hidden" id="id" name="id" th:field="*{id}" />
+					<div id="show" class="d-flex justify-content-center wrap show-product">
+					<div class="">
 					<div class="form-group">
-						<label for="precio">Precio</label> <input type="text" step="0.01"
-							class="form-control" id="precio" placeholder="1.00" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
+
+						<label for="nombre">Nombre</label>
+						<input type="text"
+							class="form-control" id="nombre" placeholder="Nombre"
+							th:field="*{nombre}" th:readonly = "${producto.id != 0} ? 'true' : 'false'"/>
+					</div>
+					<div class="form-group">
+						<label for="precio">Precio</label>
+						<input type="text" step="0.01"
+							class="form-control precio-show" id="precio" placeholder="1.00" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{precio}" />
+					</div>
 					<div class="form-group">
 						<label for="nombre">Descripcion</label> <input type="text"
 							class="form-control" id="nombre" placeholder="Descripcion" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{descripcion}" />
 					</div>
+				    </div>
+					<div class="">
 					<div class="form-group">
 						<label for="nombre">Componentes</label> <input type="text"
 							class="form-control" id="nombre" placeholder="Componentes" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
@@ -147,21 +158,98 @@
 							th:field="*{tipo}" />
 					</div>
 					</div>
-					<div class="form-group">
-						<label for="imagen" hidden>Imagen</label> <input th:field="*{imagen}" id="filebutton"
-							name="imagen" class="form-control input-file" type="hidden">
+					<div class="d-flex justify-content-center form-group">
+						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
+							name="imagen" class="form-control input-file" type="text" placeholder="https://imagefromfacebook.jpg?892u5928hnh289d8928">
 					</div>
-
 					<button th:class="${producto.id != 0} ? 'no-display' : 'btn'" th:type="${producto.id != 0} ? '' : 'submit'">Crear</button>
-					
+
 				</form>
 			<div sec:authorize="isAuthenticated()">
 			<a th:href="@{/producto/eliminar/{id}(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
-									<span class="glyphicon glyphicon-remove" ></span> Eliminar
-								</a>
-								</div>
+			<span class="glyphicon glyphicon-remove" ></span> Eliminar</a>
 			</div>
-		</div>
 	</div>
+	<!--SHOW-->
+	<div th:case="*">
+				<form method="post" enctype="multipart/form-data" action="#"
+					th:action="${producto.id != 0} ? @{/app/producto/editar/submit} : @{/producto/nuevo/submit}"
+					th:object="${producto}">
+					<h1 id="nombreh1"
+						th:text="${producto.id != 0} ? *{nombre} : 'Nuevo producto'">Nuevo
+						producto</h1>
+					<br>
+					<input type="hidden" id="id" name="id" th:field="*{id}" />
+					<div id="show" class="d-flex justify-content-between wrap show-product">
+					<div th:class="${producto.id != 0} ? 'd-inline-grid gradient-box' : 'no-display'">
+					<img class="img-show" th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}"
+						alt="product">
+					</div>
+					<div th:class="${producto.id != 0} ? 'show1' : ''">
+					<div th:class="${producto.id != 0} ? 'no-display' : 'form-group'">
+						<label for="nombre">Nombre</label>
+						<input type="text"
+							class="form-control" id="nombre" placeholder="Nombre"
+							th:field="*{nombre}" />
+					</div>
+					<div class="form-group">
+						<label th:class="${producto.id != 0} ? 'no-display' : ''" for="precio">Precio</label>
+						<input type="number" step="0.01"
+							class="form-control precio-show" id="precio" placeholder="1.00"
+							th:field="*{precio}" />
+					</div>
+					<div class="form-group">
+						<label for="nombre">Descripción</label>
+						<input type="text"
+							class="form-control" id="nombre" placeholder="Descripción"
+							th:field="*{descripcion}" />
+					</div>
+					<div class="form-group">
+						<label for="nombre">Componentes</label>
+						<input type="text"
+							class="form-control" id="nombre" placeholder="Componentes"
+							th:field="*{componentes}" />
+					</div>
+				    </div>
+					<div th:class="${producto.id != 0} ? 'show2' : ''">
+					<div class="form-group">
+						<label for="tipo">Tipo de piel</label>
+						<input type="text"
+							class="form-control" id="tipo" placeholder="Tipo de piel"
+							th:field="*{tipoPiel}" />
+					</div>
+					<div class="form-group">
+						<label for="tipo">Tipo</label>
+						<input type="text"
+							class="form-control" id="tipo" placeholder="Tipo"
+							th:field="*{tipo}" />
+					</div>
+					</div>
+					<div th:class="${producto.id != 0} ? 'no-display' : 'form-group'">
+						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
+							name="imagen" class="form-control input-file" type="text" placeholder="https://imagefromfacebook.jpg?892u5928hnh289d8928">
+					</div>
+</div>
+					<button th:class="${producto.id != 0} ? 'no-display' : 'btn'" th:type="${producto.id != 0} ? '' : 'submit'">Crear</button>
+
+				</form>
+			<div sec:authorize="isAuthenticated()">
+			<a th:href="@{/producto/eliminar/{id}(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
+			<span class="glyphicon glyphicon-remove" ></span> Eliminar</a>
+			</div>
+	</div>
+	</div>
+	<br>
+
+<script>
+function afterLoad() {
+	//Exclusivo móvil
+	if(isMobile() === true) {
+    		document.getElementById("show").classList.remove("justify-content-between");
+        	document.getElementById("show").classList.add("justify-content-center");
+        	document.getElementById("nombreh1").classList.add("text-center");
+    	}
+}   
+</script>
 </body>
 </html>

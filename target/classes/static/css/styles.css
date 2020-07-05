@@ -2,7 +2,7 @@
 
 body {
 	overflow-x: hidden; /*Sidebar*/
-	background-image: url(https://media.istockphoto.com/vectors/seamless-pattern-with-cute-gray-flowers-seamless-pattern-can-be-used-vector-id1157388049);
+	background-image: url(../images/background.png);
 }
 
 textarea{
@@ -18,6 +18,10 @@ textarea{
 
 .no-display {
 	display: none !important;
+}
+
+.text-center {
+	text-align: center;
 }
 
 @charset "UTF-8";
@@ -67,7 +71,7 @@ textarea{
 	/* !importanté */
 	border-radius: inherit;
 	/* !importanté */
-	background: linear-gradient(to right, #ff00d440, #33ff0063);
+	background: linear-gradient(to right, #ff00d440, #fff4fd);
 }
 
 .gradient-box:hover {
@@ -77,15 +81,15 @@ textarea{
 	transform: rotate(2deg);
 }
 
-.product {
+.object {
 	height: 240px;
 	width: 240px;
 	border-top-left-radius: 1em;
 	border-top-right-radius: 1em;
 }
 
-.product-title {
-	border-image: linear-gradient(to right, #ff00d440, #33ff0063);
+.object-title {
+	border-image: linear-gradient(to right, #ff00d440, #fff4fd);
 	border-image-slice: 1;
 	border-top: 4px solid;
 	border-bottom: 0px;
@@ -102,7 +106,7 @@ textarea{
 	border-bottom: 1px solid;
 	height: 65px;
 	font-size: large;
-	background: linear-gradient(to right, #ff00d429, #33ff003b);
+	background: linear-gradient(to right, #ff00d429, #fff4fd69);
 	transition: 0.5s;
 }
 
@@ -132,10 +136,6 @@ textarea{
     box-shadow: none;
 }
 
-.login-height {
-    padding-bottom: 32em !important;
-}
-
 @media screen and (max-width: 992px) {
 .nav-col {
   visibility: hidden;
@@ -161,23 +161,39 @@ textarea{
     font-weight: 501;
 }
 
+
+.login-height {
+	    padding-bottom: 34em !important;
+	}
+	
+.submenu-height {
+	    padding-bottom: 21em !important;
+	}
+
 .username {
     margin-right: -20px;
 }
 
 @media screen and (min-width: 992px) { 
 	.dropdown-menu-login {
-		margin-left: -6em !important;
+	margin-left: -5.8em !important;
+    border-top: none;
+    background: linear-gradient(to bottom, #fff8fe, #ffe8fb);
+    margin-top: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 5px;
 	}
+	
 	.dropdown {
 	    border-left: 1px solid;
 	}
 	
 	.dropdown-menu-options {
-	margin-left: -6em !important;
+	right: 0px;
+	left:initial;
     border-top: none;
-    background: linear-gradient(to bottom, #d3fcc7, #94cc85);;
-    margin-top: 10px;
+    background: linear-gradient(to bottom, #fff8fe, #ffe8fb);
+    margin-top: -1px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 5px;
     }
@@ -187,6 +203,13 @@ textarea{
 	.dropdown-menu-login {
 		float: none !important;
 		position: initial !important;
+    	background: #ffffff6b;
+	}
+	
+	.dropdown-menu-options {
+		float: none !important;
+		position: initial !important;
+    	background: #ffffff6b;
 	}
 }
 
@@ -250,7 +273,7 @@ to {
     padding-left: 20px;
 	text-decoration: underline;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	background: linear-gradient(to right, #fcb5effc, #fff8fe);
     border-color: black;
     font-weight: 501;
     color: #212529 !important;
@@ -258,7 +281,7 @@ to {
 }
 
 .btn-filter:hover, .btn-filter-disabled {
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
 	text-decoration: none;
 	}
 
@@ -275,7 +298,7 @@ to {
 	border-radius: 15px;
 	text-decoration: underline;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	background: linear-gradient(to right, #fcb5effc, #fff8fe);
     border-color: black;
     font-weight: 501;
     color: #212529 !important;
@@ -283,7 +306,7 @@ to {
 }
 
 .btn-right:hover, .btn-right-disabled {
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
 	text-decoration: none;
 	}
 }
@@ -296,7 +319,7 @@ to {
     border-bottom-left-radius: 0px;
 	text-decoration: none;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
     border-color: black;
     font-weight: 500;
     color: #212529 !important;
@@ -304,7 +327,7 @@ to {
 }
 
 .btn-filter-disabled {
-	background: linear-gradient(to right, #fcb5effc, #b8f2a4);
+	background: linear-gradient(to right, #fcb5effc, #fff8fe);
 	text-decoration: underline;
 	}
 
@@ -318,7 +341,7 @@ to {
     border-bottom-right-radius: 0px;
 	text-decoration: none;
     transform: translateY(-2.5em);
-	background: linear-gradient(to right, #ff00d429, #33ff0045);
+	background: linear-gradient(to right, #ff00d429, #fff9febf);
     border-color: black;
     font-weight: 500;
     color: #212529 !important;
@@ -333,7 +356,7 @@ to {
 	border-left: none;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
-	background: linear-gradient(to right, #ffd6f8, #e0f1d6);
+	background: linear-gradient(to right, #ffd6f8, #fff8fe);
 	transition: 0.5s;
 }
 
@@ -381,7 +404,7 @@ to {
 }
 
 .sidebar-item:hover, .actual-item {
-	background: linear-gradient(to right, #ff00d429, #33ff003b);
+	background: linear-gradient(to right, #ff00d429, #fff0);
 	font-weight: 500;
 }
 
@@ -461,7 +484,7 @@ to {
 	display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    background: linear-gradient(to right, #ffd7f8, #cdffc2);
+    background: linear-gradient(to right, #ffbdf4, #fff);
     background-color: white;	
     border-radius: 1rem;
     padding-left: 0;
@@ -546,17 +569,46 @@ to {
 		cursor: pointer;
 	}
 
-	/* Estilos para la factura */
-	.invoice-title h2, .invoice-title h3 {
-		display: inline-block;
-	}
-	.invoice-body .table>tbody>tr>.no-line {
-		border-top: none;
-	}
-	.invoice-body .table>thead>tr>.no-line {
-		border-bottom: none;
-	}
-	.invoice-body .table>tbody>tr>.thick-line {
-		border-top: 2px solid;
-	}
+/*Shows*/
+@media ( min-width : 1200px) {
+.show-product {
+}
+
+.show1 {
+	margin-left: -15em;
+}
+
+.show2 {
+    margin-right: 25em;
+}
+
+.img-show {
+	height: 240px;
+	width: 240px;
+	border-radius: 1em;
+}
+
+}
+
+@media ( max-width : 1200px) {
+.show-product {
+	width: 100%
+}
+
+.precio-show {
+	transform: matrix(0.866,0.5,-0.5,0.866,-31,-40);
+    width: 36%;
+    height: 40px;
+    margin-bottom: -20px;
+    text-align: center;
+    font-weight: 700;
+    background: blanchedalmond;
+}
+
+.img-show {
+	height: 240px;
+	width: 240px;
+	border-radius: 1em;
+}
+
 }
