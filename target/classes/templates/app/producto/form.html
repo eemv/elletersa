@@ -195,33 +195,33 @@
 					<div class="form-group">
 						<label th:class="${producto.id != 0} ? 'no-display' : ''" for="precio">Precio</label>
 						<input type="number" step="0.01"
-							class="form-control precio-show" id="precio" placeholder="1.00"
+							class="form-control precio-show" id="precio" placeholder="1.00" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{precio}" />
 					</div>
 					<div class="form-group">
 						<label for="nombre">Descripción</label>
 						<input type="text"
-							class="form-control" id="nombre" placeholder="Descripción"
+							class="form-control" id="nombre" placeholder="Descripción" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{descripcion}" />
 					</div>
 					<div class="form-group">
 						<label for="nombre">Componentes</label>
 						<input type="text"
-							class="form-control" id="nombre" placeholder="Componentes"
+							class="form-control" id="nombre" placeholder="Componentes" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{componentes}" />
 					</div>
 				    </div>
-					<div th:class="${producto.id != 0} ? 'show2' : ''">
+					<div th:class="${producto.id != 0} ? 'show2' : ''"> 
 					<div class="form-group">
 						<label for="tipo">Tipo de piel</label>
 						<input type="text"
-							class="form-control" id="tipo" placeholder="Tipo de piel"
+							class="form-control" id="tipo" placeholder="Tipo de piel" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{tipoPiel}" />
 					</div>
 					<div class="form-group">
 						<label for="tipo">Tipo</label>
 						<input type="text"
-							class="form-control" id="tipo" placeholder="Tipo"
+							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{tipo}" />
 					</div>
 					</div>
