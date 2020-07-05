@@ -4,6 +4,10 @@ body {
 	overflow-x: hidden; /*Sidebar*/
 	background-image: url(https://media.istockphoto.com/vectors/seamless-pattern-with-cute-gray-flowers-seamless-pattern-can-be-used-vector-id1157388049);
 }
+
+textarea{
+	resize: none;
+}
 .banner {
 	width: 100%;
 }

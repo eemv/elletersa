@@ -62,5 +62,5 @@ public class Tratamiento {
 	
 	@NonNull
 	@ElementCollection
-	private List<Producto> productosRecomendados = new ArrayList<>();
+	private List<Producto> productosRecomendados;
 }

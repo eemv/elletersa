@@ -20,6 +20,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	
 //	List<Producto> findByNombreContainsIgnoreCaseAndPropietario(String nombre, Usuario propietario);
 
+	
+	
 	List<Producto> findAllByNombreContainsIgnoreCase(Pageable pageable,String query);
 	
 	List<Producto> findAllByTipo(Pageable pageable, TIPO_PRODUCTO tipo);
