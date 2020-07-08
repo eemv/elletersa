@@ -37,6 +37,7 @@ body {
 .wrap {
 	position:relative;
 	flex-wrap:wrap;
+	flex-basis: 63%;
 }
 
 /* Productos Box */
@@ -546,12 +547,11 @@ to {
 		background-color: #f2f2f2;
 		padding: 25px;
 	}
-	@media ( min-width : 1200px) {
-		.container {
-			width: 90%;
-			max-width: 90%;
-		}
+	
+	.nombre-producto {
+	margin-top: 5px;
 	}
+	
 	.panel-heading {
 		font-size: 18px;
 		font-weight: bold;
@@ -566,16 +566,38 @@ to {
 	}
 
 /*Shows*/
-@media ( min-width : 1200px) {
+.form-control:disabled, .form-control[readonly] {
+    background-color: blanchedalmond;
+    opacity: 1;
+}
+@media ( min-width : 992px) {
 .show-product {
 }
 
+.container {
+	background: #ffffffe3;
+    border: 2px solid black;
+    border-radius: 10px;
+	width: 80%;
+	max-width: 80%;
+	}
+	
 .show1 {
-	margin-left: -15em;
+	margin-left: 0;
 }
 
 .show2 {
-    margin-right: 25em;
+    margin-right: 0;
+}
+
+.precio-show {
+	transform: matrix(0.866,0.5,-0.5,0.866,-31,-40);
+    width: 36%;
+    height: 40px;
+    margin-bottom: -20px;
+    text-align: center;
+    font-weight: 700;
+    background: blanchedalmond;
 }
 
 .img-show {
@@ -586,13 +608,25 @@ to {
 
 }
 
-@media ( max-width : 1200px) {
+@media ( max-width : 992px) {
 .show-product {
 	width: 100%
 }
 
+.show2 {
+	flex-basis: 100%;
+}
+
+.container {
+	background: #ffffffe3;
+    border: 2px solid black;
+    border-radius: 10px;
+	width: 95%;
+	max-width: 95%;
+	}
+	
 .precio-show {
-	transform: matrix(0.866,0.5,-0.5,0.866,-31,-40);
+	transform: matrix(0.866,0.5,-0.5,0.866,-25,-396);
     width: 36%;
     height: 40px;
     margin-bottom: -20px;
