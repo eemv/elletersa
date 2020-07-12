@@ -123,45 +123,41 @@
 					<div id="show" class="d-flex justify-content-center wrap show-product">
 					<div class="">
 					<div class="form-group">
+
 						<label for="nombre">Nombre</label>
 						<input type="text"
 							class="form-control" id="nombre" placeholder="Nombre"
-							th:field="*{nombre}" />
+							th:field="*{nombre}" th:readonly = "${producto.id != 0} ? 'true' : 'false'"/>
 					</div>
 					<div class="form-group">
 						<label for="precio">Precio</label>
-						<input type="number" step="0.01"
-							class="form-control precio-show" id="precio" placeholder="1.00"
+						<input type="text" step="0.01"
+							class="form-control precio-show" id="precio" placeholder="1.00" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{precio}" />
 					</div>
 					<div class="form-group">
-						<label for="nombre">Descripción</label>
-						<input type="text"
-							class="form-control" id="nombre" placeholder="Descripción"
+						<label for="nombre">Descripcion</label> <input type="text"
+							class="form-control" id="nombre" placeholder="Descripcion" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{descripcion}" />
 					</div>
 				    </div>
 					<div class="">
 					<div class="form-group">
-						<label for="nombre">Componentes</label>
-						<input type="text"
-							class="form-control" id="nombre" placeholder="Componentes"
+						<label for="nombre">Componentes</label> <input type="text"
+							class="form-control" id="nombre" placeholder="Componentes" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{componentes}" />
 					</div>
 					<div class="form-group">
-						<label for="tipo">Tipo de piel</label>
-						<input type="text"
-							class="form-control" id="tipo" placeholder="Tipo de piel"
+						<label for="tipo">Tipo de piel</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo de piel" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{tipoPiel}" />
 					</div>
 					<div class="form-group">
-						<label for="tipo">Tipo</label>
-						<input type="text"
-							class="form-control" id="tipo" placeholder="Tipo"
+						<label for="tipo">Tipo</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{tipo}" />
 					</div>
 					</div>
-</div>
 					<div class="d-flex justify-content-center form-group">
 						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
 							name="imagen" class="form-control input-file" type="text" placeholder="https://imagefromfacebook.jpg?892u5928hnh289d8928">
@@ -199,33 +195,33 @@
 					<div class="form-group">
 						<label th:class="${producto.id != 0} ? 'no-display' : ''" for="precio">Precio</label>
 						<input type="number" step="0.01"
-							class="form-control precio-show" id="precio" placeholder="1.00"
+							class="form-control precio-show" id="precio" placeholder="1.00" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{precio}" />
 					</div>
 					<div class="form-group">
 						<label for="nombre">Descripción</label>
 						<input type="text"
-							class="form-control" id="nombre" placeholder="Descripción"
+							class="form-control" id="nombre" placeholder="Descripción" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{descripcion}" />
 					</div>
 					<div class="form-group">
 						<label for="nombre">Componentes</label>
 						<input type="text"
-							class="form-control" id="nombre" placeholder="Componentes"
+							class="form-control" id="nombre" placeholder="Componentes" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{componentes}" />
 					</div>
 				    </div>
-					<div th:class="${producto.id != 0} ? 'show2' : ''">
+					<div th:class="${producto.id != 0} ? 'show2' : ''"> 
 					<div class="form-group">
 						<label for="tipo">Tipo de piel</label>
 						<input type="text"
-							class="form-control" id="tipo" placeholder="Tipo de piel"
+							class="form-control" id="tipo" placeholder="Tipo de piel" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{tipoPiel}" />
 					</div>
 					<div class="form-group">
 						<label for="tipo">Tipo</label>
 						<input type="text"
-							class="form-control" id="tipo" placeholder="Tipo"
+							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{tipo}" />
 					</div>
 					</div>

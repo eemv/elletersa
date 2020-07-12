@@ -10,18 +10,20 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.eemv.elletersa.modelo.Pack;
+import com.eemv.elletersa.modelo.Oferta;
 import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PIEL;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
 import com.eemv.elletersa.modelo.TIPO_TRATAMIENTO;
 import com.eemv.elletersa.modelo.Tratamiento;
 import com.eemv.elletersa.modelo.Usuario;
-import com.eemv.elletersa.repositorios.PackRepository;
+import com.eemv.elletersa.repositorios.OfertaRepository;
 import com.eemv.elletersa.repositorios.ProductoRepository;
 import com.eemv.elletersa.repositorios.TratamientoRepository;
-import com.eemv.elletersa.servicios.PackServicio;
+import com.eemv.elletersa.servicios.OfertaServicio;
 import com.eemv.elletersa.servicios.UsuarioServicio;
+
+import javassist.expr.NewArray;
 
 
 
@@ -43,14 +45,15 @@ public class ElletersaApplication {
 
 	
 	@Bean
-	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository, TratamientoRepository tratamientoRepository,
-			PackServicio packServicio) {
+	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository
+			, TratamientoRepository tratamientoRepository, OfertaRepository ofertaRepository) {
 		return args -> {
 
 			Usuario usuario = new Usuario("Luis Miguel", "López Magaña", null, "luismi.lopez@openwebinars.net", "luismi");
 			 usuarioServicio.registrar(usuario);
-
 			 
+			
+			
 			productoRepository.saveAll( Arrays.asList(new Producto("Crema 1", 100.00,"https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/82371178_2457842064464876_158547300392632320_n.jpg?_nc_cat=100&_nc_ohc=KK_EnnnU6IkAX-yw9Jk&_nc_ht=scontent-mad1-1.xx&oh=132391aa8417c44feff129d9524d5448&oe=5EBB9F39",
 					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
 					new Producto("Crema 2", 2500.00,
@@ -62,45 +65,34 @@ public class ElletersaApplication {
 					new Producto("Crema 6", 350.00, "https://www.torrerovidre.com/files/pagina_simple/7/blog-cremas-cosmeticos.png","Componentes estos y aquellos","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",TIPO_PIEL.MADURA,TIPO_PRODUCTO.INDEPENDIENTE),
 					new Producto("Crema 7", 350.00, "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/66614576_2302466366669114_1889631012892180480_n.jpg?_nc_cat=103&_nc_ohc=x_qXryjeUCwAX8UZ3__&_nc_ht=scontent-mad1-1.xx&oh=0222de2ad77dc45f2d13248aee63ad3e&oe=5EF9C474","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA,TIPO_PRODUCTO.COMPLEMENTARIO),
 					new Producto("Crema 8", 350.00, "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/70150585_2343310115918072_9107878944631160832_o.jpg?_nc_cat=106&_nc_ohc=Slr-MPaX09gAX8Az_o-&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=469cb7265bd86d32e157b859c0043bc5&oe=5EB8A7B5","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA,TIPO_PRODUCTO.COMPLEMENTARIO)));
-				
-			 tratamientoRepository.saveAll(Arrays.asList(
+			Producto p5 = productoRepository.getOne(5L);
+			List<Producto> l1 = new ArrayList<>();
+			l1.add(p5);
+			tratamientoRepository.saveAll(Arrays.asList(
 					 new Tratamiento("Tratamiento 1", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/84990606_2474879242761158_8908963229443555328_n.jpg?_nc_cat=100&_nc_sid=a61e81&_nc_ohc=esMT_Lvql1gAX-klInh&_nc_ht=scontent-mad1-1.xx&oh=eadefcda6ea9ba90158a9051b2f40580&oe=5EB84B3A",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-							 , 6, 30.00, 120, TIPO_TRATAMIENTO.CORPORAL),
+							 , 6, 30.00, 120, TIPO_TRATAMIENTO.CORPORAL,new ArrayList<>()),
 					 new Tratamiento("Tratamiento 2", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-							 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL),
+							 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL,new ArrayList<>()),
 					 new Tratamiento("Tratamiento 3", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/84990606_2474879242761158_8908963229443555328_n.jpg?_nc_cat=100&_nc_sid=a61e81&_nc_ohc=esMT_Lvql1gAX-klInh&_nc_ht=scontent-mad1-1.xx&oh=eadefcda6ea9ba90158a9051b2f40580&oe=5EB84B3A",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-							 , 1, 45.00, 50, TIPO_TRATAMIENTO.FACIAL),
+							 , 1, 45.00, 50, TIPO_TRATAMIENTO.FACIAL,new ArrayList<>()),
 					 new Tratamiento("Tratamiento 4", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/82819442_2467271300188619_4021108236902989824_o.jpg?_nc_cat=111&_nc_sid=2d5d41&_nc_ohc=V5FsgjzoFmQAX-RX_oF&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=d825264d9628497c300965bcb89ae4ba&oe=5EFF37F7",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-							 , 76, 189.00, 10, TIPO_TRATAMIENTO.CORPORAL),
+							 , 76, 189.00, 10, TIPO_TRATAMIENTO.CORPORAL, new ArrayList<>()),
 					 new Tratamiento("Tratamiento 5", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/79824148_2441887579393658_5355566142117117952_o.jpg?_nc_cat=109&_nc_sid=8024bb&_nc_ohc=znPRdlHNHiwAX9T_Jlz&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=2c06803748f0798f3b084b97fa914294&oe=5EFB56A8",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-							 , 3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL)
+							 , 3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL, l1)
 					 ));
-			 
-			 Tratamiento t1 = new Tratamiento("Tratamiento 6", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-					 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL);
-			 
-			 Tratamiento t2 = new Tratamiento("Tratamiento 7", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
-					 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL);
-			 
-			 Producto p1 = new Producto("Crema9", 234.54,"https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/66614576_2302466366669114_1889631012892180480_n.jpg?_nc_cat=103&_nc_ohc=x_qXryjeUCwAX8UZ3__&_nc_ht=scontent-mad1-1.xx&oh=0222de2ad77dc45f2d13248aee63ad3e&oe=5EF9C474",
-					 "Lorem ipso", "Estos y aquellos", TIPO_PIEL.CASTIGADAS, TIPO_PRODUCTO.COMPLEMENTARIO);
-			 
-			 List<Tratamiento> TratamientosList1 = new ArrayList<Tratamiento>();
-			 List<Producto> ProductosList1 = new ArrayList<>();
-			 ProductosList1.add(p1);
-			 TratamientosList1.add(t1);
-			 TratamientosList1.add(t2);
-			 
-			 Pack pack1 =  new Pack("Pack1",ProductosList1,TratamientosList1, "Descripcion", 45.00,"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg");
-			 
-			 packServicio.insertar(pack1);
+//			ofertaRepository.saveAll(Arrays.asList(
+//					new Oferta(1, "Oferta1", p5, null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+//							3.00)
+//					
+//					
+//					
+//					));
 		};
+		
 	}	
 }

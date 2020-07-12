@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<title>Elletersa - Tratamientos</title>
+<title>Elletersa - Ofertas</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../static/images/favicon.ico"
@@ -115,52 +115,52 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6">
 				<form method="post" enctype="multipart/form-data" action="#"
-					th:action="${tratamiento.id != 0} ? @{/app/tratamiento/editar/submit} : @{/tratamiento/nuevo/submit}"
-					th:object="${tratamiento}">
+					th:action="${oferta.id != 0} ? @{/app/oferta/editar/submit} : @{/oferta/nuevo/submit}"
+					th:object="${oferta}">
 					<h1
-						th:text="${tratamiento.id != 0} ? *{nombre} : 'Nuevo tratamiento'">Nuevo
-						Tratamiento</h1>
+						th:text="${oferta.id != 0} ? *{nombre} : 'Nueva oferta'">Nueva Oferta</h1>
 						
 					<input type="hidden" id="id" name="id" th:field="*{id}" />
+					
 					<div class="form-group">
-						<label for="precio">Precio de sesión</label> <input type="text" step="0.01"
-							class="form-control" id="precio" placeholder="1.00" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
-							th:field="*{precioSesion}" />
-					</div>
-					<div class="form-group">
-						<label for="precio">Número de sesiones</label> <input type="text" step="0.01"
-							class="form-control" id="precio" placeholder="1.00" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
-							th:field="*{numSesiones}" />
-					</div>
-					<div class="form-group">
-						<label for="tipo">Tipo de Tratamiento</label> <input type="text"
-							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
-							th:field="*{tipo}" />
-					</div>
-					<div class="form-group">
-						<label for="tipo">Minutos por Sesión</label> <input type="text"
-							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
-							th:field="*{minutosSesion}" />
-					</div>
-					<div class="form-group">
-						<label for="nombre">Descripcion</label> <textarea 
-							class="form-control" id="nombre" placeholder="Descripcion" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
-							th:text="*{descripcion}" >
-							</textarea>
+						<label for="nombre">Nombre</label> <input type="text" 
+							class="form-control" id="nombre" th:readonly = "${oferta.id != 0} ? 'true' : 'false'"
+							th:field="*{nombre}" name="nombre"/>
 					</div>
 					
 					<div class="form-group">
-						<label for="imagen" hidden>Imagen</label> <input th:field="*{imagen}" id="filebutton" th:readonly = true
-							name="imagen" class="form-control input-file" type="hidden" >
+						<label for="producto">Producto</label> <input type="text" 
+							class="form-control" id="producto" th:readonly = "${oferta.id != 0} ? 'true' : 'false'"
+							th:field="*{producto.nombre}" name="producto"/>
+					</div>
+					<div class="form-group">
+						<label for="tratamiento">Tratamiento</label> <input type="text" 
+							class="form-control" id="tratamiento"  th:readonly = "${oferta.id != 0} ? 'true' : 'false'"
+							th:field="*{tratamiento.nombre}" name="tratamiento" />
+					</div>
+					<div class="form-group">
+						<label for="tipo">Nuevo precio</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${oferta.id != 0} ? 'true' : 'false'"
+							th:field="*{nuevoPrecio}" />
+					</div>
+					<div class="form-group">
+						<label for="tipo">Descripción</label> <input type="text"
+							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${oferta.id != 0} ? 'true' : 'false'"
+							th:field="*{descripcion}" />
+					</div>
+					
+					<div class="form-group">
+						<label for="imagen" >Imagen</label> <input th:field="*{imagen}" id="filebutton" th:readonly = "${oferta.id != 0} ? 'true' : 'false'"
+							name="imagen" class="form-control input-file"  >
 					</div>
 					
 					<img th:src="@{*{imagen}}"/>
 
-					<button th:class="${tratamiento.id != 0} ? 'no-display' : 'btn'" th:type="${tratamiento.id != 0} ? '' : 'submit'">Crear</button>
+					<button th:class="${oferta.id != 0} ? 'no-display' : 'btn'" th:type="${oferta.id != 0} ? '' : 'submit'">Crear</button>
 					
 				</form>
 			<div sec:authorize="isAuthenticated()">
-			<a th:href="@{/tratamiento/eliminar/{id}(id=${tratamiento.id})}" class="btn btn-danger"  th:style="${tratamiento.id != 0 ? ' ' : 'display:none'}">
+			<a th:href="@{/oferta/eliminar/{id}(id=${oferta.id})}" class="btn btn-danger"  th:style="${oferta.id != 0 ? ' ' : 'display:none'}">
 									<span class="glyphicon glyphicon-remove" ></span> Eliminar
 								</a>
 								</div>

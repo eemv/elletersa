@@ -4,6 +4,10 @@ body {
 	overflow-x: hidden; /*Sidebar*/
 	background-image: url(../images/background.png);
 }
+
+textarea{
+	resize: none;
+}
 .banner {
 	width: 100%;
 }

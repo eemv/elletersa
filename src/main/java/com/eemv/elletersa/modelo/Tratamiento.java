@@ -65,8 +65,7 @@ public class Tratamiento {
 	@NonNull
 	private TIPO_TRATAMIENTO tipo;
 	
-//	@Valid
-//	@(cascade = CascadeType.ALL)
-//	private Iterable<Producto> productosRecomendados;
-	
+	@NonNull
+	@ElementCollection
+	private List<Producto> productosRecomendados;
 }
