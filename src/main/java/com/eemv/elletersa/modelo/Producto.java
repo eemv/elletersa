@@ -1,12 +1,16 @@
 package com.eemv.elletersa.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
+
+import org.springframework.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -54,6 +58,10 @@ public class Producto {
 	
 	@NonNull
 	private TIPO_PRODUCTO tipo;
+	
+	@Nullable
+	@OneToOne(optional = true,cascade = CascadeType.ALL)
+	private Oferta oferta;
 	
 //	@ManyToMany
 //	private List<Pack> packs;

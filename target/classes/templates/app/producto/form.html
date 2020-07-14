@@ -204,7 +204,14 @@
 							class="form-control" id="nombre" placeholder="Descripción" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
 							th:field="*{descripcion}" />
 					</div>
-					<div class="form-group">
+						<div class="form-group">
+						<label for="nombre">link oferta</label>
+						<a
+							class="form-control" id="noferta" placeholder="Descripción" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
+							th:type = "${producto.oferta != null } ? '' : 'hidden'"
+							th:href="${producto.oferta != null } ? @{'/public/ofertas/' + ${oferta.id.toString()}} : '' ">  </a>
+					</div>
+					<div class="form-group"> 
 						<label for="nombre">Componentes</label>
 						<input type="text"
 							class="form-control" id="nombre" placeholder="Componentes" th:readonly = "${producto.id != 0} ? 'true' : 'false'"
@@ -229,10 +236,14 @@
 						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
 							name="imagen" class="form-control input-file" type="text" placeholder="https://imagefromfacebook.jpg?892u5928hnh289d8928">
 					</div>
+					
+					
 </div>
+
 					<button th:class="${producto.id != 0} ? 'no-display' : 'btn'" th:type="${producto.id != 0} ? '' : 'submit'">Crear</button>
 
 				</form>
+			
 			<div sec:authorize="isAuthenticated()">
 			<a th:href="@{/producto/eliminar/{id}(id=${producto.id})}" class="btn btn-danger"  th:style="${producto.id != 0 ? ' ' : 'display:none'}">
 			<span class="glyphicon glyphicon-remove" ></span> Eliminar</a>

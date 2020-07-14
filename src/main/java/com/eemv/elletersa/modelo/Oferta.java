@@ -53,12 +53,12 @@ public class Oferta {
 	
 	@Nullable
 	@Valid
-	@ManyToOne(optional = true, cascade = CascadeType.ALL) 
+	@OneToOne(optional = true, cascade = CascadeType.REMOVE) 
 	private Producto producto;
 
 	@Nullable
 	@Valid
-	@ManyToOne(optional = true, cascade = CascadeType.ALL) 
+	@OneToOne(optional = true, cascade = CascadeType.REMOVE) 
 	private Tratamiento tratamiento;
 	
 	@NonNull
