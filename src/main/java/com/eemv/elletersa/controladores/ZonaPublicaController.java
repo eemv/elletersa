@@ -2,16 +2,19 @@ package com.eemv.elletersa.controladores;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.eemv.elletersa.modelo.Oferta;
 import com.eemv.elletersa.modelo.Pack;
@@ -85,13 +88,30 @@ public class ZonaPublicaController {
 	}
 
 	@GetMapping("/productos/{id}")
-	public String showProduct(Model model, @PathVariable Long id) {
+	public ModelAndView showProduct(ModelMap modelMap, @PathVariable Long id) {
+		ModelAndView modelAndView = new ModelAndView();
 		Producto result = productoServicio.findById(id); 
 		if (result != null) {
-			model.addAttribute("producto", result);
+			
+			Oferta oferta = new Oferta();
+			Long ofertaId = 0L;
+			 try { 
+				ofertaId = ofertaServicio.findAll().stream().filter(x->x.getProducto().equals(result)).findFirst().get().getId();
+			 } catch(RuntimeException NoSuchElementException){
+			 }
+			
+			if(ofertaId != null) {
+				
+			oferta = ofertaServicio.findById(ofertaId);
+			}
+			modelMap.addAttribute("producto", result);
+			modelMap.addAttribute("oferta", oferta);
+			
 		}
-		model.addAttribute("usuario", new Usuario());
-		return "app/producto/form";
+		modelMap.addAttribute("usuario", new Usuario());
+		modelAndView.addAllObjects(modelMap);
+		modelAndView.setViewName("app/producto/form");
+		return modelAndView;
 	}
 	
 	@GetMapping("/productos/search/{search}")

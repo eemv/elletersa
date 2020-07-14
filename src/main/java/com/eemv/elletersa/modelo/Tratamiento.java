@@ -12,11 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+
+import org.springframework.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -68,4 +71,8 @@ public class Tratamiento {
 	@NonNull
 	@ElementCollection
 	private List<Producto> productosRecomendados;
+	
+	@Nullable
+	@OneToOne(optional = true,cascade = CascadeType.ALL)
+	private Oferta oferta;
 }
