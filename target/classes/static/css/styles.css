@@ -236,6 +236,10 @@ to {
 }
 
 /* Filter Button */
+.btn {
+	margin-bottom: 10px;
+}
+
 .btn1 {
     display: inline-block;
     width: max-content;
@@ -574,6 +578,7 @@ to {
     background-color: blanchedalmond;
     opacity: 1;
 }
+
 @media ( min-width : 992px) {
 .show-product {
 }
@@ -592,16 +597,51 @@ to {
 
 .show2 {
     margin-right: 0;
+    flex-direction: column;
+}
+
+.money {
+  display: inline-block;
+  transform: matrix(0.866,0.5,-0.5,0.866,-12,-15);
+  position: relative;
+  font-weight: 700;
+}
+
+/* position the unit to the right of the wrapper */
+.money::after {
+  position: absolute;
+  top: 9px;
+  right: 9.7em;
+  transition: all .05s ease-in-out;
+}
+
+/* set the unit abbreviation for each unit class */
+.money::after {
+  content: '€';
 }
 
 .precio-show {
-	transform: matrix(0.866,0.5,-0.5,0.866,-31,-40);
+    font-weight: 700;
+	padding-right: 0px;
     width: 36%;
     height: 40px;
     margin-bottom: -20px;
     text-align: center;
-    font-weight: 700;
-    background: blanchedalmond;
+    background: linear-gradient(-45deg, #ffbdf9, #f9dcf5, #ffc6f2, #fff8fe);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .img-show {
@@ -619,6 +659,7 @@ to {
 
 .show2 {
 	flex-basis: 100%;
+	flex-direction: column;
 }
 
 .container {
@@ -629,14 +670,48 @@ to {
 	max-width: 95%;
 	}
 	
+.money {
+  display: inline-block;
+  transform: matrix(0.866,0.5,-0.5,0.866,-15,-11);
+  position: relative;
+  font-weight: 700;
+}
+
+/* position the unit to the right of the wrapper */
+.money::after {
+  position: absolute;
+  top: 9px;
+  right: 10.5em;
+  transition: all .05s ease-in-out;
+}
+
+/* set the unit abbreviation for each unit class */
+.money::after {
+  content: '€';
+}
+
 .precio-show {
-	transform: matrix(0.866,0.5,-0.5,0.866,-25,-396);
     width: 36%;
+    padding-right: 1em;
     height: 40px;
     margin-bottom: -20px;
     text-align: center;
     font-weight: 700;
-    background: blanchedalmond;
+    background: linear-gradient(-45deg, #ffbdf9, #f9dcf5, #ffc6f2, #fff8fe);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .img-show {

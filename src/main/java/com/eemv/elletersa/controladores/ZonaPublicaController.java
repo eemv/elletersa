@@ -2,7 +2,6 @@ package com.eemv.elletersa.controladores;
 
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -127,7 +125,7 @@ public class ZonaPublicaController {
 	
 	@GetMapping("/tratamientos")
 	public String showTratamientos(@RequestParam Map<String, Object> params, Model model) {
-		Integer itemsPerPage = 1;
+		Integer itemsPerPage = 6;
 		List<Tratamiento> result;
 		Integer page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1) : 0;
 		String tipo =params.get("tipo") != null ? (params.get("tipo").toString()) : "";
