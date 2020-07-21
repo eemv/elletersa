@@ -43,12 +43,12 @@ public class Pack {
 	
 	@Valid
 	@NonNull
-	@OneToMany (cascade = CascadeType.ALL)
+	@OneToMany (cascade = CascadeType.REMOVE)
 	private List<Producto> productos;
 
 	@Valid
 	@NonNull
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Tratamiento> tratamientos;
 	
 	@NonNull

@@ -117,6 +117,48 @@
 				<form method="post" enctype="multipart/form-data" action="#"
 					th:action="${pack.id != 0} ? @{/app/pack/editar/submit} : @{/pack/nuevo/submit}"
 					th:object="${pack}">
+						<div th:switch="${pack.id}" class="container col-md-offset-3 col-md-6">
+						
+						<!--CREATE-->
+				<div th:case="0">
+	
+						<h1
+						th:text="${pack.id != 0} ? *{nombre} : 'Nuevo pack'">Nuevo
+						Pack</h1>
+						
+					<input type="hidden" id="id" name="id" th:field="*{id}" />
+					<div class="form-group">
+						<label for="nombre">Nombre</label> <input type="text"
+							class="form-control" id="nombre" placeholder="Nombre"
+							th:field="*{nombre}" />
+					</div>
+					<div class="form-group">
+						<label for="precio">Precio</label> <input type="number" step="0.01"
+							class="form-control" id="precio" placeholder="1.00"
+							th:field="*{precio}" />
+					<div class="form-group">
+						<label for="descripcion ">Descripcion</label> <input type="text"
+							class="form-control" id="descripcion" placeholder="Descripcion"
+							th:field="*{descripcion}" />
+					</div>
+					</div>
+					<div class="form-group">
+						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
+							name="imagen" class="form-control input-file" type="text">
+					</div>
+					
+					 <div th:each="producto, itemStat : *{productos}">
+	                    <input th:field="*{productos[__${itemStat.index}__].id}" />
+	                </div>
+	                
+	                 <div th:each="tratamiento, itemStat : *{tratamientos}">
+	                    <input th:field="*{tratamientos[__${itemStat.index}__].id}" />
+	                </div>
+		
+			</div>
+						
+						<!--SHOW-->
+					<div th:case="*">
 					<h1
 						th:text="${pack.id != 0} ? *{nombre} : 'Nuevo pack'">Nuevo
 						Pack</h1>
@@ -136,50 +178,57 @@
 						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
 							name="imagen" class="form-control input-file" type="text">
 					</div>
-
-	<div class="d-flex justify-content-center wrap margin-center"
-			id="productos">
-			<div class="d-inline-grid gradient-box"
-				th:each="producto : ${productos}">
-
+					
+					<div class="d-inline-grid gradient-box"
+				th:each="producto : ${productos}" th:type = "${productos.size() > 0} ? '' : 'hidden'"> 
+				
 				<div>
 					<a th:href="@{/public/productos/{id}(id=${producto.id})}"> <img
-						class="product"
+						class="object"
 						th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}"
 						alt="product">
 					</a>
 				</div>
 
 				<div class="product-title">
-					<h4 class="" th:text="${producto.nombre}"></h4>
-					<p th:text="${#numbers.formatDecimal(producto.precio,1,2)} + €">
+					<h4 class="" th:text="${pack.nombre}"></h4>
+					<p th:text="${#numbers.formatDecimal(pack.precio,1,2)} + €">
 				</div>
 			</div>
-			<br>
-		</div>
-		
-			<div class="d-flex justify-content-center wrap margin-center"
-			id="productos">
 			<div class="d-inline-grid gradient-box"
-				th:each="tratamiento : ${tratamientos}">
-
+				th:each="tratamiento : ${tratamientos}" th:type = "${tratamientos.size() > 0} ? '' : 'hidden'"> 
+				
 				<div>
+					<div>
 					<a th:href="@{/public/tratamientos/{id}(id=${tratamiento.id})}"> <img
-						class="product"
+						class="object"
 						th:src="${#strings.isEmpty(tratamiento.imagen)} ? 'http://placehold.it/300x200' : ${tratamiento.imagen}"
-						alt="product">
+						alt="tratamiento">
 					</a>
+					</div>
 				</div>
 
+				<div class="object-title">
+					<h4 class="" th:text="${tratamiento.nombre}"></h4>
+					<p th:text="${#numbers.formatDecimal(tratamiento.precioSesion,1,2)} + €">
+				</div>
 			</div>
-			<br>
-		</div>
+			</div>
+				
+			</div>
+			<button th:class="${pack.id != 0} ? 'no-display' : 'btn'" th:type="${pack.id != 0} ? '' : 'submit'">Crear</button>
+			</form>
+	</div>
+			
+			</div>
+			</div>
+			
 
 
 
-					<button th:class="${pack.id != 0} ? 'no-display' : 'btn'" th:type="${pack.id != 0} ? '' : 'submit'">Crear</button>
 					
-				</form>
+					
+				
 			<div sec:authorize="isAuthenticated()">
 			<a th:href="@{/pack/eliminar/{id}(id=${pack.id})}" class="btn btn-danger"  th:style="${pack.id != 0 ? ' ' : 'display:none'}">
 									<span class="glyphicon glyphicon-remove" ></span> Eliminar

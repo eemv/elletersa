@@ -122,14 +122,20 @@
 						Tratamiento</h1>
 						
 					<input type="hidden" id="id" name="id" th:field="*{id}" />
+						<div class="form-group">
+						<label for="nombre">Nombre</label> <textarea 
+							class="form-control" id="nombre" placeholder="Nombre" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
+							th:text="*{nombre}" >
+							</textarea>
+					</div>
 					<div class="form-group">
 						<label for="precio">Precio de sesión</label> <input type="text" step="0.01"
-							class="form-control" id="precio" placeholder="1.00" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
+							class="form-control" id="precioSesion" placeholder="1.00" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
 							th:field="*{precioSesion}" />
 					</div>
 					<div class="form-group">
 						<label for="precio">Número de sesiones</label> <input type="text" step="0.01"
-							class="form-control" id="precio" placeholder="1.00" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
+							class="form-control" id="numSesiones" placeholder="1.00" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
 							th:field="*{numSesiones}" />
 					</div>
 					<div class="form-group">
@@ -139,12 +145,12 @@
 					</div>
 					<div class="form-group">
 						<label for="tipo">Minutos por Sesión</label> <input type="text"
-							class="form-control" id="tipo" placeholder="Tipo" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
+							class="form-control" id="minutosSesion" placeholder="Tipo" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
 							th:field="*{minutosSesion}" />
 					</div>
 					<div class="form-group">
-						<label for="nombre">Descripcion</label> <textarea 
-							class="form-control" id="nombre" placeholder="Descripcion" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
+						<label for="descripcion">Descripcion</label> <textarea 
+							class="form-control" id="descripcion" placeholder="Descripcion" th:readonly = "${tratamiento.id != 0} ? 'true' : 'false'"
 							th:text="*{descripcion}" >
 							</textarea>
 					</div>
@@ -156,6 +162,9 @@
 					
 					<img th:src="@{*{imagen}}"/>
 
+	 <div th:each="producto, itemStat : *{productosRecomendados}">
+	                    <input th:field="*{productosRecomendados[__${itemStat.index}__].id}" />
+	                </div>
 					<button th:class="${tratamiento.id != 0} ? 'no-display' : 'btn'" th:type="${tratamiento.id != 0} ? '' : 'submit'">Crear</button>
 					
 				</form>
