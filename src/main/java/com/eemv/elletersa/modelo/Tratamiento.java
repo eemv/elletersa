@@ -38,14 +38,14 @@ public class Tratamiento {
 	private long id;
 	
 	@NonNull
-	@NotBlank
+//	@NotBlank
 	private String nombre; 
 	
 	@NonNull
 	private String imagen; 
 	
 	@NonNull
-	@NotBlank
+//	@NotBlank
 	private String descripcion; 
 	
 	@Positive

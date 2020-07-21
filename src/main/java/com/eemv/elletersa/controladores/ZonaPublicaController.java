@@ -211,8 +211,8 @@ public class ZonaPublicaController {
 		Pack result = packServicio.findById(id); 
 		if (result != null) {
 			model.addAttribute("pack", result);
-			model.addAttribute("productos",result.getProductos());
-			model.addAttribute("tratamientos",result.getTratamientos());
+//			model.addAttribute("productos",result.getProductos());
+//			model.addAttribute("tratamientos",result.getTratamientos());
 		}
 		model.addAttribute("usuario", new Usuario());
 		return "app/pack/form";
