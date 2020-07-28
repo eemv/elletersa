@@ -42,7 +42,7 @@ function isMobile() {
 	  return check;
 	};
 	
-//Navbar
+// Navbar
 		function prepareLogin() {
 			if(isMobile() === true) {
 				var login = document.getElementById("nav");
@@ -64,7 +64,7 @@ function isMobile() {
 					login.classList.add("submenu-height");
 				}
 				
-				//Aparición del submenú con delay en móvil
+				// Aparición del submenú con delay en móvil
 				if(submenu.style.getPropertyValue('display') == "") {
 					setTimeout(function(){submenu.style.setProperty('display', 'block');}, 300);
 				} else {
@@ -82,15 +82,25 @@ function isMobile() {
 		
 		function colapse() {
 			var nav = document.getElementById("nav");
+			var submenu = document.getElementById("submenu");
+			
 			var col = document.getElementById("navbarSupportedContent").classList;
 			if (col.contains("nav-col-active") === true) {
+				//La primera parte es por si el submenu de logeo o de usuario estaba abierto
+				if(nav.classList.contains("submenu-height") === true) {
+					nav.classList.remove("submenu-height");
+					submenu.style.removeProperty('display');
+				} else if(nav.classList.contains("login-height") === true) {
+					nav.classList.remove("login-height");
+				}
+				
 				col.remove("nav-col-active");
 				console.log("remove");
 				nav.style.height = "";
 			} else {
 				console.log("show");
 				col.add("nav-col-active");
-				nav.style.height = "14em";
+				nav.style.height = "19em";
 			}
 		}
 // Importar HTMl

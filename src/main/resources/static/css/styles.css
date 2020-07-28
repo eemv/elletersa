@@ -164,11 +164,11 @@ textarea{
 
 
 .login-height {
-	    padding-bottom: 34em !important;
+	    padding-bottom: 40em !important;
 	}
 	
 .submenu-height {
-	    padding-bottom: 21em !important;
+	    padding-bottom: 26em !important;
 	}
 
 .username {
@@ -615,9 +615,17 @@ to {
   transition: all .05s ease-in-out;
 }
 
+.money-sesion::after {
+    right: 7.0em;
+}
+
 /* set the unit abbreviation for each unit class */
-.money::after {
+.money-euro::after {
   content: '€';
+}
+
+.money-sesion::after {
+  content: '€/sesión';
 }
 
 .precio-show {
@@ -630,6 +638,11 @@ to {
     background: linear-gradient(-45deg, #ffbdf9, #f9dcf5, #ffc6f2, #fff8fe);
 	background-size: 400% 400%;
 	animation: gradient 10s ease infinite;
+}
+
+.sesions {
+    width: 54%;
+    text-align: initial;
 }
 
 @keyframes gradient {
@@ -685,9 +698,18 @@ to {
   transition: all .05s ease-in-out;
 }
 
+
+.money-sesion::after {
+    right: 8.2em;
+}
+
 /* set the unit abbreviation for each unit class */
-.money::after {
+.money-euro::after {
   content: '€';
+}
+
+.money-sesion::after {
+  content: '€/sesión';
 }
 
 .precio-show {
@@ -700,6 +722,11 @@ to {
     background: linear-gradient(-45deg, #ffbdf9, #f9dcf5, #ffc6f2, #fff8fe);
 	background-size: 400% 400%;
 	animation: gradient 10s ease infinite;
+}
+
+.sesions {
+    width: 50%;
+    text-align: initial;
 }
 
 @keyframes gradient {
