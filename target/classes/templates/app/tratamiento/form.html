@@ -196,8 +196,7 @@
 			<form method="post" enctype="multipart/form-data" action="#"
 				th:action="${tratamiento.id != 0} ? @{/app/tratamiento/editar/submit} : @{/tratamiento/nuevo/submit}"
 				th:object="${tratamiento}">
-				<h1 id="nombreh1" class="nombre-tratamiento"
-					th:text="*{nombre}"></h1>
+				<h1 id="nombreh1" class="nombre-tratamiento" th:text="*{nombre}"></h1>
 				<br> <input type="hidden" id="id" name="id" th:field="*{id}" />
 				<div id="show" class="d-flex wrap show-product">
 					<div class="form-group">
@@ -207,8 +206,8 @@
 								alt="product">
 						</div>
 						<div class="money money-sesion">
-							<input disabled type="number"
-								step="0.01" class="form-control precio-show sesions" id="precioSesion"
+							<input disabled type="number" step="0.01"
+								class="form-control precio-show sesions" id="precioSesion"
 								placeholder="1.00" th:field="*{precioSesion}" />
 						</div>
 					</div>
@@ -226,20 +225,21 @@
 						</div>
 						<div class="form-group">
 							<label for="tipo">Número de sesiones</label> <input type="text"
-								class="form-control" id="numSesiones" placeholder="Número de sesiones"
-								th:field="*{numSesiones}" />
+								class="form-control" id="numSesiones"
+								placeholder="Número de sesiones" th:field="*{numSesiones}" />
 						</div>
 						<div class="form-group">
 							<label for="tipo">Minutos por sesión</label> <input type="text"
-								class="form-control" id="minutosSesion" placeholder="Minutos por sesión"
-								th:field="*{minutosSesion}" />
+								class="form-control" id="minutosSesion"
+								placeholder="Minutos por sesión" th:field="*{minutosSesion}" />
 						</div>
-						<div th:each="prod : *{productosRecomendados}">
-						<div class="form-group">
-							<label for="tipo">Oreusbas</label> <input type="text"
-								class="form-control" id="productosRecomendados" placeholder="sdjsjdis"
-								th:field="${prod.nombre}" />
-						</div>
+						<div class="d-inline-grid gradient-box"
+							th:each="prod, itemStat : *{productosRecomendados}">
+							<div class="form-group">
+								<label for="tipo">Oreusbas</label> <input type="text"
+									class="form-control" id="productosRecomendados"
+									placeholder="sdjsjdis" th:field="${prod.nombre}" />
+							</div>
 						</div>
 					</div>
 				</div>

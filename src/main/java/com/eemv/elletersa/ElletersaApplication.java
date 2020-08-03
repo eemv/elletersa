@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.eemv.elletersa.modelo.Oferta;
 import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PIEL;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
@@ -103,8 +104,7 @@ public class ElletersaApplication {
 							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
 							3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL, l1)));
 //			ofertaRepository.saveAll(Arrays.asList(
-//					new Oferta(1, "Oferta1", p5, null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
-//							3.00)
+//					new Oferta(1, "Oferta1", p5, null, "Lorem ipsum dolor sit laborum.", 3.00, p5.getImagen())
 //					
 //					
 //					

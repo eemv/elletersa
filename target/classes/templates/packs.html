@@ -191,7 +191,7 @@ function jumpPage() {
 	var input = prompt("Indica a qué página quieres acceder: (entre 1 y " + maxPag + ")");
 
 	if(input>= "1" && input<=maxPag) {
-	window.location.href = "/public/productos?page=" + input + "&tipo=" + tipo;
+	window.location.href = "/public/packs?page=" + input;
 	} else if(input == null || input == "") {
 		
 	} else {
@@ -300,44 +300,6 @@ function afterLoad() {
 
     document.getElementById("pages").classList.add("d-flex");
     document.getElementById("pages").classList.remove("no-display");
-    
-	//Sidebar item
-    if(url.search("COMPLEMENTARIO") != "-1") {
-        
-  	   var t1=document.getElementById("t1");
-        
-        aux = document.createElement('div');
-        aux.innerHTML = t1.innerHTML;
-        aux.classList.add("actual-item");
-        
-        t1.classList.forEach(el => aux.classList.add(el));
-        t1.parentNode.replaceChild(aux, t1);
-        
-    } else if(url.search("INDEPENDIENTE") != "-1") {
-		  
-  	  var t2=document.getElementById("t2");
-        
-        aux = document.createElement('div');
-        aux.innerHTML = t2.innerHTML;
-        aux.classList.add("actual-item");
-        
-        t2.classList.forEach(el => aux.classList.add(el));
-        t2.parentNode.replaceChild(aux, t2);
-        
-    } else {
-		var t=document.getElementById("t");
-        
-        aux = document.createElement('div');
-        aux.innerHTML = t.innerHTML;
-        aux.classList.add("actual-item");
-        
-        t.classList.forEach(el => aux.classList.add(el));
-        t.parentNode.replaceChild(aux, t);
-        
-        var path = url.split("&");
-        console.log(path[0]);
-        window.history.pushState(history.state,document.title, path[0]);
-    }
 	
 	//Exclusivo móvil
 	if(isMobile() === true) {
