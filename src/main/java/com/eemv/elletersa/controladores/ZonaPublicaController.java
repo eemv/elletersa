@@ -181,7 +181,7 @@ public class ZonaPublicaController {
 	
 	@GetMapping("/packs")
 	public String showPacks(@RequestParam Map<String, Object> params, Model model) {
-		Integer itemsPerPage = 1;
+		Integer itemsPerPage = 6;
 		List<Pack> result;
 		Integer page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1) : 0;
 		
@@ -220,7 +220,7 @@ public class ZonaPublicaController {
 	
 	@GetMapping("/ofertas")
 	public String showOfertas(@RequestParam Map<String, Object> params, Model model) {
-		Integer itemsPerPage = 1;
+		Integer itemsPerPage = 6;
 		List<Oferta> result;
 		Integer page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1) : 0;
 		

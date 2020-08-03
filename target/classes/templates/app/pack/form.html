@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<title>Elletersa - Packs</title>
+<title>Elletersa - pack</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../static/images/favicon.ico"
@@ -39,14 +40,13 @@
 	crossorigin="anonymous"></script>
 <script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
 </head>
-<body onload="actualItem()">
-<!-- Banner
+<body onload="afterLoad()">
+	<!-- Banner
 <div class="text-center">
 	<img src="../static/images/banner.png" th:src="@{/images/banner.png}" class="img-fluid rounded banner" alt="banner">
 </div>
 -->
 
-<!-- Navbar -->
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-light" id="nav">
 		<a class="navbar-brand" href="#"><img class="navbar-logo"
@@ -63,179 +63,167 @@
 						class="sr-only">(current)</span></a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/public/productos">Productos</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/public/tratamientos">Tratamientos</a></li>
+				<li class="nav-item"><a class="nav-link" href="/public/packs">Packs</a></li>
+				<li class="nav-item"><a class="nav-link" href="/public/ofertas">Ofertas</a></li>
 			</ul>
 
 			<!-- Autenticado -->
-			<a href="" sec:authorize="isAuthenticated()" sec:authentication="name" type="button" class="nav-link dropdown username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-			<div sec:authorize="isAuthenticated()" class="nav-item btn-group">
-			 <a href="" type="button" class="nav-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			 <span class="sr-only">Toggle Dropdown</span>
-			 </a>
-			 <div class="dropdown-menu dropdown-menu-options">
-				<a class="dropdown-item" href="#">Perfil</a>
-				<a class="dropdown-item" href="#">Configuración</a>
+			<div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+				<a onclick="prepareSubmenu()" sec:authentication="name"
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"></a>
+			</div>
+			<div class="dropdown-menu dropdown-menu-options" id="submenu">
+				<a class="dropdown-item" href="#">Perfil</a> <a
+					class="dropdown-item" href="#">Configuración</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/auth/logout">Cerrar sesión</a>
-				</div>
 			</div>
-					
+
 			<!--No Autenticado -->
 			<div sec:authorize="!isAuthenticated()" class="nav-item dropdown">
 				<a onclick="prepareLogin()" class="nav-link dropdown-toggle"
 					href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> Iniciar sesión </a>
 				<div class="dropdown-menu dropdown-menu-login">
-					<form class="px-4 py-3" id="loginform" method="POST" action="/auth/login-post" role="form">
-					<div class="form-group">
-						<label for="exampleDropdownFormEmail1">Dirección de correo</label>
-						<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" name="username">
+					<form class="px-4 py-3" id="loginform" method="POST"
+						action="/auth/login-post" role="form">
+						<div class="form-group">
+							<label for="exampleDropdownFormEmail1">Dirección de
+								correo</label> <input type="email" class="form-control"
+								id="exampleDropdownFormEmail1" placeholder="email@example.com"
+								name="username">
 						</div>
 						<div class="form-group">
-							<label for="exampleDropdownFormPassword1">Contraseña</label>
-							<input  type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="password">
+							<label for="exampleDropdownFormPassword1">Contraseña</label> <input
+								type="password" class="form-control"
+								id="exampleDropdownFormPassword1" placeholder="Password"
+								name="password">
 						</div>
 						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="dropdownCheck"> <label class="form-check-label"
+							<input type="checkbox" class="form-check-input"
+								id="dropdownCheck"> <label class="form-check-label"
 								for="dropdownCheck"> Recuérdame </label>
 						</div>
 						<button type="submit" class="btn btn-primary">Entrar</button>
 					</form>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">¿Primera vez aquí? ¡Regístrate!</a>
-					<a class="dropdown-item" href="#">¿Has olvidado tu contraseña?</a>
+					<a class="dropdown-item" href="#">¿Primera vez aquí?
+						¡Regístrate!</a> <a class="dropdown-item" href="#">¿Has olvidado
+						tu contraseña?</a>
 				</div>
 			</div>
 		</div>
 	</nav>
-	
+
 	<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
+	<div th:switch="${pack.id}" class="container col-md-offset-3 col-md-6">
+		<!-- CREATE -->
+		<div th:case="0">
+			<form method="post" enctype="multipart/form-data" action="#"
+				th:action="${pack.id != 0} ? @{/app/pack/editar/submit} : @{/pack/nuevo/submit}"
+				th:object="${pack}">
+				<h1 th:text="${pack.id != 0} ? *{nombre} : 'Nuevo pack'">Nuevo
+					pack</h1>
 
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-offset-3 col-md-6">
-				<form method="post" enctype="multipart/form-data" action="#"
-					th:action="${pack.id != 0} ? @{/app/pack/editar/submit} : @{/pack/nuevo/submit}"
-					th:object="${pack}">
-						<div th:switch="${pack.id}" class="container col-md-offset-3 col-md-6">
-						
-						<!--CREATE-->
-				<div th:case="0">
-	
-						<h1
-						th:text="${pack.id != 0} ? *{nombre} : 'Nuevo pack'">Nuevo
-						Pack</h1>
-						
-					<input type="hidden" id="id" name="id" th:field="*{id}" />
-					<div class="form-group">
-						<label for="nombre">Nombre</label> <input type="text"
-							class="form-control" id="nombre" placeholder="Nombre"
-							th:field="*{nombre}" />
-					</div>
-					<div class="form-group">
-						<label for="precio">Precio</label> <input type="number" step="0.01"
-							class="form-control" id="precio" placeholder="1.00"
-							th:field="*{precio}" />
-					<div class="form-group">
-						<label for="descripcion ">Descripcion</label> <input type="text"
-							class="form-control" id="descripcion" placeholder="Descripcion"
-							th:field="*{descripcion}" />
-					</div>
-					</div>
-					<div class="form-group">
-						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
-							name="imagen" class="form-control input-file" type="text">
-					</div>
-					
-					 <div th:each="producto, itemStat : *{productos}">
-	                    <input th:field="*{productos[__${itemStat.index}__].id}" />
-	                </div>
-	                
-	                 <div th:each="tratamiento, itemStat : *{tratamientos}">
-	                    <input th:field="*{tratamientos[__${itemStat.index}__].id}" />
-	                </div>
-		
-			</div>
-						
-						<!--SHOW-->
-					<div th:case="*">
-					<h1
-						th:text="${pack.id != 0} ? *{nombre} : 'Nuevo pack'">Nuevo
-						Pack</h1>
-						
-					<input type="hidden" id="id" name="id" th:field="*{id}" />
-					<div class="form-group">
-						<label for="precio">Precio</label> <input type="number" step="0.01"
-							class="form-control" id="precio" placeholder="1.00"
-							th:field="*{precio}" />
-					<div class="form-group">
-						<label for="nombre">Descripcion</label> <input type="text"
-							class="form-control" id="nombre" placeholder="Descripcion"
-							th:field="*{descripcion}" />
-					</div>
-					</div>
-					<div class="form-group">
-						<label for="imagen">Imagen</label> <input th:field="*{imagen}" id="filebutton"
-							name="imagen" class="form-control input-file" type="text">
-					</div>
-					
-					<div class="d-inline-grid gradient-box"
-				th:each="producto : ${productos}" th:type = "${productos.size() > 0} ? '' : 'hidden'"> 
-				
-				<div>
-					<a th:href="@{/public/productos/{id}(id=${producto.id})}"> <img
-						class="object"
-						th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/300x200' : ${producto.imagen}"
-						alt="product">
-					</a>
+				<input type="hidden" id="id" name="id" th:field="*{id}" />
+				<div class="form-group">
+					<label for="nombre">Nombre</label>
+					<textarea class="form-control" id="nombre" placeholder="Nombre"
+						th:readonly="${pack.id != 0} ? 'true' : 'false'"
+						th:text="*{nombre}">
+							</textarea>
+				</div>
+				<div class="form-group">
+					<label for="tipo">Precio</label> <input type="text"
+						step="0.01" class="form-control" id="precio"
+						placeholder="1.00" th:field="*{precio}" />
+				</div>
+				<div class="form-group">
+					<label for="descripcion">Descripcion</label>
+					<textarea class="form-control" id="descripcion"
+						placeholder="Descripcion"
+						th:readonly="${pack.id != 0} ? 'true' : 'false'"
+						th:text="*{descripcion}">
+							</textarea>
+				</div>
+				<div th:each="producto, itemStat : *{productos}">
+					<input th:field="*{productos[__${itemStat.index}__].id}" />
 				</div>
 
-				<div class="product-title">
-					<h4 class="" th:text="${pack.nombre}"></h4>
-					<p th:text="${#numbers.formatDecimal(pack.precio,1,2)} + €">
-				</div>
-			</div>
-			<div class="d-inline-grid gradient-box"
-				th:each="tratamiento : ${tratamientos}" th:type = "${tratamientos.size() > 0} ? '' : 'hidden'"> 
-				
-				<div>
-					<div>
-					<a th:href="@{/public/tratamientos/{id}(id=${tratamiento.id})}"> <img
-						class="object"
-						th:src="${#strings.isEmpty(tratamiento.imagen)} ? 'http://placehold.it/300x200' : ${tratamiento.imagen}"
-						alt="tratamiento">
-					</a>
-					</div>
+				<div th:each="tratamiento, itemStat : *{tratamientos}">
+					<input th:field="*{tratamientos[__${itemStat.index}__].id}" />
 				</div>
 
-				<div class="object-title">
-					<h4 class="" th:text="${tratamiento.nombre}"></h4>
-					<p th:text="${#numbers.formatDecimal(tratamiento.precioSesion,1,2)} + €">
+				<div class="form-group">
+					<label for="imagen" hidden>Imagen</label> <input
+						th:field="*{imagen}" id="filebutton" th:readonly=true
+						name="imagen" class="form-control input-file" type="hidden">
 				</div>
-			</div>
-			</div>
-				
-			</div>
-			<button th:class="${pack.id != 0} ? 'no-display' : 'btn'" th:type="${pack.id != 0} ? '' : 'submit'">Crear</button>
+
+				<img th:src="@{*{imagen}}" />
+
+				<button th:class="${pack.id != 0} ? 'no-display' : 'btn'"
+					th:type="${pack.id != 0} ? '' : 'submit'">Crear</button>
+
 			</form>
-	</div>
-			
-			</div>
-			</div>
-			
-
-
-
-					
-					
-				
+		</div>
+		<!--SHOW-->
+		<div th:case="*">
+			<form method="post" enctype="multipart/form-data" action="#"
+				th:action="${pack.id != 0} ? @{/app/pack/editar/submit} : @{/pack/nuevo/submit}"
+				th:object="${pack}">
+				<h1 id="nombreh1" class="nombre-producto" th:text="*{nombre}"></h1>
+				<br> <input type="hidden" id="id" name="id" th:field="*{id}" />
+				<div id="show" class="d-flex wrap show-product">
+					<div class="form-group">
+						<div style="position: sticky" class="d-inline-grid gradient-box">
+							<img class="img-show"
+								th:src="${#strings.isEmpty(pack.imagen)} ? 'http://placehold.it/300x200' : ${pack.imagen}"
+								alt="pack">
+						</div>
+						<div class="money money-euro">
+							<input disabled type="number" step="0.01"
+								class="form-control precio-show"
+								id="precio" placeholder="1.00" th:field="*{precio}" />
+						</div>
+					</div>
+					<div class="show2 d-flex wrap show-product">
+						<div class="form-group">
+							<label for="nombre">Descripción</label>
+							<textarea class="form-control" id="descripcion"
+								placeholder="Descripcion" rows="3" cols="50"
+								th:field="*{descripcion}" readonly></textarea>
+						</div>
+					</div>
+				</div>
+			</form>
 			<div sec:authorize="isAuthenticated()">
-			<a th:href="@{/pack/eliminar/{id}(id=${pack.id})}" class="btn btn-danger"  th:style="${pack.id != 0 ? ' ' : 'display:none'}">
-									<span class="glyphicon glyphicon-remove" ></span> Eliminar
-								</a>
-								</div>
+				<a th:href="@{/pack/eliminar/{id}(id=${pack.id})}"
+					class="btn btn-danger"
+					th:style="${pack.id != 0 ? ' ' : 'display:none'}"> <span
+					class="glyphicon glyphicon-remove"></span> Eliminar
+				</a> <br>
 			</div>
 		</div>
 	</div>
+	<br>
+
+	<script>
+		function afterLoad() {
+			//Exclusivo móvil
+			if (isMobile() === true) {
+				document.getElementById("show").classList
+						.remove("justify-content-between");
+				document.getElementById("show").classList
+						.add("justify-content-center");
+				document.getElementById("nombreh1").classList
+						.add("text-center");
+			}
+		}
+	</script>
 </body>
 </html>

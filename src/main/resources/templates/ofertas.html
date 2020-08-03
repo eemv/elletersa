@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<title>Elletersa - Productos</title>
+<title>Elletersa - Ofertas</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../static/images/favicon.ico"
@@ -126,7 +126,7 @@
 		<!-- /#sidebar-wrapper -->
 
 		<!-- Productos -->
-		<div class="d-flex justify-content-center wrap margin-center"
+		<div class="d-flex justify-content-center wrap"
 			id="productos">
 			<div class="d-inline-grid gradient-box"
 				th:each="oferta : ${ofertas}">
@@ -141,7 +141,7 @@
 
 				<div class="object-title">
 					<h4 class="" th:text="${oferta.nombre}"></h4>
-					<p th:text="${#numbers.formatDecimal(oferta.precio,1,2)} + €">
+					<p th:text="${#numbers.formatDecimal(oferta.nuevoPrecio,1,2)} + €">
 				</div>
 			</div>
 			<br>

@@ -105,19 +105,19 @@ public class ElletersaApplication {
 			lt2.add(t3);
 			lt3.add(t2);
 			tratamientoRepository.saveAll(Arrays.asList(
-					 new Tratamiento("Tratamiento 1", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/84990606_2474879242761158_8908963229443555328_n.jpg?_nc_cat=100&_nc_sid=a61e81&_nc_ohc=esMT_Lvql1gAX-klInh&_nc_ht=scontent-mad1-1.xx&oh=eadefcda6ea9ba90158a9051b2f40580&oe=5EB84B3A",
+					 new Tratamiento("Tratamiento 1", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 							 , 6, 30.00, 120, TIPO_TRATAMIENTO.CORPORAL,new ArrayList<>()),
 					 new Tratamiento("Tratamiento 2", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 							 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL,new ArrayList<>()),
-					 new Tratamiento("Tratamiento 3", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/84990606_2474879242761158_8908963229443555328_n.jpg?_nc_cat=100&_nc_sid=a61e81&_nc_ohc=esMT_Lvql1gAX-klInh&_nc_ht=scontent-mad1-1.xx&oh=eadefcda6ea9ba90158a9051b2f40580&oe=5EB84B3A",
+					 new Tratamiento("Tratamiento 3", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 							 , 1, 45.00, 50, TIPO_TRATAMIENTO.FACIAL,new ArrayList<>()),
-					 new Tratamiento("Tratamiento 4", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/82819442_2467271300188619_4021108236902989824_o.jpg?_nc_cat=111&_nc_sid=2d5d41&_nc_ohc=V5FsgjzoFmQAX-RX_oF&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=d825264d9628497c300965bcb89ae4ba&oe=5EFF37F7",
+					 new Tratamiento("Tratamiento 4", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 							 , 76, 189.00, 10, TIPO_TRATAMIENTO.CORPORAL, new ArrayList<>()),
-					 new Tratamiento("Tratamiento 5", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/79824148_2441887579393658_5355566142117117952_o.jpg?_nc_cat=109&_nc_sid=8024bb&_nc_ohc=znPRdlHNHiwAX9T_Jlz&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=2c06803748f0798f3b084b97fa914294&oe=5EFB56A8",
+					 new Tratamiento("Tratamiento 5", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
 							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
 							 , 3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL, l1)
 					 ));
@@ -127,10 +127,10 @@ public class ElletersaApplication {
 			oferta1.setProducto(p5);
 			Oferta oferta2 = new Oferta("oferta2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
 					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
-			oferta1.setProducto(p3);
+			oferta2.setProducto(p3);
 			Oferta oferta3 = new Oferta("oferta3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
 					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
-			oferta1.setTratamiento(t3);
+			oferta3.setTratamiento(t3);
 			ofertaRepository.saveAll(Arrays.asList(
 					oferta1,oferta2,oferta3
 					));

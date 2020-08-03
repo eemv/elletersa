@@ -182,9 +182,9 @@
 
 				<img th:src="@{*{imagen}}" />
 
-				<div th:each="tratamiento, itemStat : *{tratamientosRecomendados}">
+				<div th:each="tratamiento, itemStat : *{productosRecomendados}">
 					<input
-						th:field="*{tratamientosRecomendados[__${itemStat.index}__].id}" />
+						th:field="*{productosRecomendados[__${itemStat.index}__].id}" />
 				</div>
 				<button th:class="${tratamiento.id != 0} ? 'no-display' : 'btn'"
 					th:type="${tratamiento.id != 0} ? '' : 'submit'">Crear</button>
@@ -203,7 +203,7 @@
 						<div style="position: sticky" class="d-inline-grid gradient-box">
 							<img class="img-show"
 								th:src="${#strings.isEmpty(tratamiento.imagen)} ? 'http://placehold.it/300x200' : ${tratamiento.imagen}"
-								alt="product">
+								alt="tratamiento">
 						</div>
 						<div class="money money-sesion">
 							<input disabled type="number" step="0.01"
@@ -216,29 +216,28 @@
 							<label for="nombre">Descripción</label>
 							<textarea class="form-control" id="descripcion"
 								placeholder="Descripcion" rows="3" cols="50"
-								th:field="*{descripcion}"></textarea>
+								th:field="*{descripcion}" readonly></textarea>
 						</div>
 						<div class="form-group">
 							<label for="tipo">Tipo</label> <input type="text"
 								class="form-control" id="tipo" placeholder="Tipo"
-								th:field="*{tipo}" />
+								th:field="*{tipo}" readonly/>
 						</div>
 						<div class="form-group">
 							<label for="tipo">Número de sesiones</label> <input type="text"
 								class="form-control" id="numSesiones"
-								placeholder="Número de sesiones" th:field="*{numSesiones}" />
+								placeholder="Número de sesiones" th:field="*{numSesiones}" readonly/>
 						</div>
 						<div class="form-group">
 							<label for="tipo">Minutos por sesión</label> <input type="text"
 								class="form-control" id="minutosSesion"
-								placeholder="Minutos por sesión" th:field="*{minutosSesion}" />
+								placeholder="Minutos por sesión" th:field="*{minutosSesion}" readonly/>
 						</div>
-						<div class="d-inline-grid gradient-box"
-							th:each="prod, itemStat : *{productosRecomendados}">
-							<div class="form-group">
-								<label for="tipo">Oreusbas</label> <input type="text"
-									class="form-control" id="productosRecomendados"
-									placeholder="sdjsjdis" th:field="${prod.nombre}" />
+						<div class="form-group">
+						<label for="tipo">Productos recomendados</label> 
+							<div th:each="tratamiento, itemStat : *{productosRecomendados}">
+							<img class="img-show"
+							th:src="*{productosRecomendados[__${itemStat.index}__].imagen}" >
 							</div>
 						</div>
 					</div>
