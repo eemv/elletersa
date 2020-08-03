@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.eemv.elletersa.modelo.Oferta;
+import com.eemv.elletersa.modelo.Pack;
 import com.eemv.elletersa.modelo.Producto;
 import com.eemv.elletersa.modelo.TIPO_PIEL;
 import com.eemv.elletersa.modelo.TIPO_PRODUCTO;
@@ -18,6 +19,7 @@ import com.eemv.elletersa.modelo.TIPO_TRATAMIENTO;
 import com.eemv.elletersa.modelo.Tratamiento;
 import com.eemv.elletersa.modelo.Usuario;
 import com.eemv.elletersa.repositorios.OfertaRepository;
+import com.eemv.elletersa.repositorios.PackRepository;
 import com.eemv.elletersa.repositorios.ProductoRepository;
 import com.eemv.elletersa.repositorios.TratamientoRepository;
 import com.eemv.elletersa.servicios.UsuarioServicio;
@@ -38,8 +40,10 @@ public class ElletersaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository,
-			TratamientoRepository tratamientoRepository, OfertaRepository ofertaRepository) {
+
+	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository
+			, TratamientoRepository tratamientoRepository, OfertaRepository ofertaRepository, PackRepository packRepository) {
+
 		return args -> {
 
 			Usuario usuario = new Usuario("Luis Miguel", "López Magaña", null, "luismi.lopez@openwebinars.net",
@@ -81,35 +85,67 @@ public class ElletersaApplication {
 							"Componentes estos y aquellos", TIPO_PIEL.MADURA, TIPO_PRODUCTO.COMPLEMENTARIO)));
 			
 			Producto p5 = productoRepository.getOne(5L);
+			Producto p3 = productoRepository.getOne(3L);
+			Producto p2 = productoRepository.getOne(2L);
+			
+			Tratamiento t2 = tratamientoRepository.getOne(2L);
+			Tratamiento t3 = tratamientoRepository.getOne(3L);
+			Tratamiento t4 = tratamientoRepository.getOne(4L);
 			List<Producto> l1 = new ArrayList<>();
+			List<Producto> l2 = new ArrayList<>();
+			List<Producto> l3 = new ArrayList<>();
+			List<Tratamiento> lt1 = new ArrayList<>();
+			List<Tratamiento> lt2 = new ArrayList<>();
+			List<Tratamiento> lt3 = new ArrayList<>();
 			l1.add(p5);
-			tratamientoRepository.saveAll(Arrays.asList(new Tratamiento("Tratamiento 1",
-					"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
-					6, 30.00, 120, TIPO_TRATAMIENTO.CORPORAL, new ArrayList<>()),
-					new Tratamiento("Tratamiento 2",
-							"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
-							3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL, new ArrayList<>()),
-					new Tratamiento("Tratamiento 3",
-							"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
-							1, 45.00, 50, TIPO_TRATAMIENTO.FACIAL, new ArrayList<>()),
-					new Tratamiento("Tratamiento 4",
-							"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
-							76, 189.00, 10, TIPO_TRATAMIENTO.CORPORAL, new ArrayList<>()),
-					new Tratamiento("Tratamiento 5",
-							"https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
-							3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL, l1)));
-//			ofertaRepository.saveAll(Arrays.asList(
-//					new Oferta(1, "Oferta1", p5, null, "Lorem ipsum dolor sit laborum.", 3.00, p5.getImagen())
-//					
-//					
-//					
-//					));
-		};
 
-	}
+			l2.add(p3);
+			l3.add(p5);
+			lt1.add(t4);
+			lt2.add(t3);
+			lt3.add(t2);
+			tratamientoRepository.saveAll(Arrays.asList(
+					 new Tratamiento("Tratamiento 1", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/84990606_2474879242761158_8908963229443555328_n.jpg?_nc_cat=100&_nc_sid=a61e81&_nc_ohc=esMT_Lvql1gAX-klInh&_nc_ht=scontent-mad1-1.xx&oh=eadefcda6ea9ba90158a9051b2f40580&oe=5EB84B3A",
+							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+							 , 6, 30.00, 120, TIPO_TRATAMIENTO.CORPORAL,new ArrayList<>()),
+					 new Tratamiento("Tratamiento 2", "https://img.grouponcdn.com/deal/cbHxSnrkobfiCistM73L/po-1000x600/v1/c700x420.jpg",
+							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+							 , 3, 60.00, 50, TIPO_TRATAMIENTO.FACIAL,new ArrayList<>()),
+					 new Tratamiento("Tratamiento 3", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/84990606_2474879242761158_8908963229443555328_n.jpg?_nc_cat=100&_nc_sid=a61e81&_nc_ohc=esMT_Lvql1gAX-klInh&_nc_ht=scontent-mad1-1.xx&oh=eadefcda6ea9ba90158a9051b2f40580&oe=5EB84B3A",
+							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+							 , 1, 45.00, 50, TIPO_TRATAMIENTO.FACIAL,new ArrayList<>()),
+					 new Tratamiento("Tratamiento 4", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/82819442_2467271300188619_4021108236902989824_o.jpg?_nc_cat=111&_nc_sid=2d5d41&_nc_ohc=V5FsgjzoFmQAX-RX_oF&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=d825264d9628497c300965bcb89ae4ba&oe=5EFF37F7",
+							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+							 , 76, 189.00, 10, TIPO_TRATAMIENTO.CORPORAL, new ArrayList<>()),
+					 new Tratamiento("Tratamiento 5", "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/79824148_2441887579393658_5355566142117117952_o.jpg?_nc_cat=109&_nc_sid=8024bb&_nc_ohc=znPRdlHNHiwAX9T_Jlz&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=2c06803748f0798f3b084b97fa914294&oe=5EFB56A8",
+							 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum."
+							 , 3, 60.00, 50, TIPO_TRATAMIENTO.CORPORAL, l1)
+					 ));
+			
+			Oferta oferta1 = new Oferta("oferta1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+			oferta1.setProducto(p5);
+			Oferta oferta2 = new Oferta("oferta2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+			oferta1.setProducto(p3);
+			Oferta oferta3 = new Oferta("oferta3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+			oferta1.setTratamiento(t3);
+			ofertaRepository.saveAll(Arrays.asList(
+					oferta1,oferta2,oferta3
+					));
+			
+			Pack pck1 = new Pack("pack1", l1, lt1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+//			Pack pck2 = new Pack("pack2", l3, lt3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+//					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+			Pack pck3 = new Pack("pack3", l2, lt2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+			packRepository.saveAll(Arrays.asList(
+					pck1,pck3));
+		
+		};
+		
+		
+	}	
 }
