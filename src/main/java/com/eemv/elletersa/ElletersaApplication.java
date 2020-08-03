@@ -22,12 +22,7 @@ import com.eemv.elletersa.repositorios.OfertaRepository;
 import com.eemv.elletersa.repositorios.PackRepository;
 import com.eemv.elletersa.repositorios.ProductoRepository;
 import com.eemv.elletersa.repositorios.TratamientoRepository;
-import com.eemv.elletersa.servicios.OfertaServicio;
 import com.eemv.elletersa.servicios.UsuarioServicio;
-
-import javassist.expr.NewArray;
-
-
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -44,29 +39,51 @@ public class ElletersaApplication {
 		SpringApplication.run(ElletersaApplication.class, args);
 	}
 
-
-	
 	@Bean
+
 	public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoRepository productoRepository
 			, TratamientoRepository tratamientoRepository, OfertaRepository ofertaRepository, PackRepository packRepository) {
+
 		return args -> {
 
-			Usuario usuario = new Usuario("Luis Miguel", "López Magaña", null, "luismi.lopez@openwebinars.net", "luismi");
-			 usuarioServicio.registrar(usuario);
-			 
-			
-			
-			productoRepository.saveAll( Arrays.asList(new Producto("Crema 1", 100.00,"https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/82371178_2457842064464876_158547300392632320_n.jpg?_nc_cat=100&_nc_ohc=KK_EnnnU6IkAX-yw9Jk&_nc_ht=scontent-mad1-1.xx&oh=132391aa8417c44feff129d9524d5448&oe=5EBB9F39",
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
+			Usuario usuario = new Usuario("Luis Miguel", "López Magaña", null, "luismi.lopez@openwebinars.net",
+					"luismi");
+			usuarioServicio.registrar(usuario);
+
+			productoRepository.saveAll(Arrays.asList(new Producto("Crema 1", 100.00,
+					"https://static.abc.es/media/sociedad/2016/09/27/CREMA-kDjE--620x349@abc.jpg",
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+					"Componentes estos y aquellos", TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
 					new Producto("Crema 2", 2500.00,
-							"https://www.minicar.es/large/Volkswagen-Golf-GTi-G60-Serie-II-%281990%29-Norev-1%3A18-i22889.jpg","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.SENSIBLE,TIPO_PRODUCTO.COMPLEMENTARIO
-							),
-					new Producto("Crema 3", 10.50, "https://static.abc.es/media/sociedad/2016/09/27/CREMA-kDjE--620x349@abc.jpg","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
-					new Producto("Crema 4", 425.00, "https://i1-unilevermx.a8e.net.br/gg/crema-ponds-s-humectante-nutritiva-100g_170477802_7501056326142.jpg","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.CASTIGADAS, TIPO_PRODUCTO.COMPLEMENTARIO ),
-					new Producto("Crema 5", 10.00, "https://www.instyle.es/medio/2019/02/01/sesderma-c-vit-radiance-fluido-luminoso_4d237e39_640x637.jpg","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.TODAS,TIPO_PRODUCTO.COMPLEMENTARIO),
-					new Producto("Crema 6", 350.00, "https://www.torrerovidre.com/files/pagina_simple/7/blog-cremas-cosmeticos.png","Componentes estos y aquellos","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",TIPO_PIEL.MADURA,TIPO_PRODUCTO.INDEPENDIENTE),
-					new Producto("Crema 7", 350.00, "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/66614576_2302466366669114_1889631012892180480_n.jpg?_nc_cat=103&_nc_ohc=x_qXryjeUCwAX8UZ3__&_nc_ht=scontent-mad1-1.xx&oh=0222de2ad77dc45f2d13248aee63ad3e&oe=5EF9C474","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA,TIPO_PRODUCTO.COMPLEMENTARIO),
-					new Producto("Crema 8", 350.00, "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/s960x960/70150585_2343310115918072_9107878944631160832_o.jpg?_nc_cat=106&_nc_ohc=Slr-MPaX09gAX8Az_o-&_nc_ht=scontent-mad1-1.xx&_nc_tp=7&oh=469cb7265bd86d32e157b859c0043bc5&oe=5EB8A7B5","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.","Componentes estos y aquellos",TIPO_PIEL.MADURA,TIPO_PRODUCTO.COMPLEMENTARIO)));
+							"https://www.minicar.es/large/Volkswagen-Golf-GTi-G60-Serie-II-%281990%29-Norev-1%3A18-i22889.jpg",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							"Componentes estos y aquellos", TIPO_PIEL.SENSIBLE, TIPO_PRODUCTO.COMPLEMENTARIO),
+					new Producto("Crema 3", 10.50,
+							"https://static.abc.es/media/sociedad/2016/09/27/CREMA-kDjE--620x349@abc.jpg",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							"Componentes estos y aquellos", TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
+					new Producto("Crema 4", 425.00,
+							"https://i1-unilevermx.a8e.net.br/gg/crema-ponds-s-humectante-nutritiva-100g_170477802_7501056326142.jpg",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							"Componentes estos y aquellos", TIPO_PIEL.CASTIGADAS, TIPO_PRODUCTO.COMPLEMENTARIO),
+					new Producto("Crema 5", 10.00,
+							"https://www.instyle.es/medio/2019/02/01/sesderma-c-vit-radiance-fluido-luminoso_4d237e39_640x637.jpg",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							"Componentes estos y aquellos", TIPO_PIEL.TODAS, TIPO_PRODUCTO.COMPLEMENTARIO),
+					new Producto("Crema 6", 350.00,
+							"https://www.torrerovidre.com/files/pagina_simple/7/blog-cremas-cosmeticos.png",
+							"Componentes estos y aquellos",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							TIPO_PIEL.MADURA, TIPO_PRODUCTO.INDEPENDIENTE),
+					new Producto("Crema 7", 350.00,
+							"https://static.abc.es/media/sociedad/2016/09/27/CREMA-kDjE--620x349@abc.jpg",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							"Componentes estos y aquellos", TIPO_PIEL.MADURA, TIPO_PRODUCTO.COMPLEMENTARIO),
+					new Producto("Crema 8", 350.00,
+							"https://static.abc.es/media/sociedad/2016/09/27/CREMA-kDjE--620x349@abc.jpg",
+							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+							"Componentes estos y aquellos", TIPO_PIEL.MADURA, TIPO_PRODUCTO.COMPLEMENTARIO)));
+			
 			Producto p5 = productoRepository.getOne(5L);
 			Producto p3 = productoRepository.getOne(3L);
 			Producto p2 = productoRepository.getOne(2L);
@@ -81,6 +98,7 @@ public class ElletersaApplication {
 			List<Tratamiento> lt2 = new ArrayList<>();
 			List<Tratamiento> lt3 = new ArrayList<>();
 			l1.add(p5);
+
 			l2.add(p3);
 			l3.add(p5);
 			lt1.add(t4);

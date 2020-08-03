@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<title>Elletersa - Ofertas</title>
+<title>Elletersa - Productos</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../static/images/favicon.ico"
@@ -65,6 +65,10 @@
 					href="/public/productos">Productos</a></li>
 				<li class="nav-item"><a class="nav-link"
 				href="/public/tratamientos">Tratamientos</a></li>
+				<li class="nav-item"><a class="nav-link"
+				href="/public/packs">Packs</a></li>
+				<li class="nav-item"><a class="nav-link"
+				href="/public/ofertas">Ofertas</a></li>
 			</ul>
 
 			<!-- Autenticado -->
@@ -113,7 +117,7 @@
 					placeholder="Búsqueda" aria-label="Search">
 				<button class="btn my-2 my-sm-0 search" type="submit">Buscar</button>
 			</form> -->
-	<div class="d-flex justify-content-between">
+	<div class="d-flex justify-content-end">
 		<a sec:authorize="isAuthenticated()" class="btn1 btn-right"
 			href="/oferta/nuevo">Añadir oferta</a>
 	</div>
@@ -121,23 +125,23 @@
 	<div class="d-flex" id="wrapper">
 		<!-- /#sidebar-wrapper -->
 
-		<!-- ofertas -->
+		<!-- Productos -->
 		<div class="d-flex justify-content-center wrap margin-center"
 			id="productos">
 			<div class="d-inline-grid gradient-box"
 				th:each="oferta : ${ofertas}">
 
 				<div>
-				 	<a th:href="@{/public/ofertas/{id}(id=${oferta.id})}"> <img
+					<a th:href="@{/public/ofertas/{id}(id=${oferta.id})}"> <img
 						class="object"
 						th:src="${#strings.isEmpty(oferta.imagen)} ? 'http://placehold.it/300x200' : ${oferta.imagen}"
-						alt="product">
-					</a> 
+						alt="oferta">
+					</a>
 				</div>
 
 				<div class="object-title">
 					<h4 class="" th:text="${oferta.nombre}"></h4>
-					<p th:text="${#numbers.formatDecimal(oferta.nuevoPrecio,1,2)} + €">
+					<p th:text="${#numbers.formatDecimal(oferta.precio,1,2)} + €">
 				</div>
 			</div>
 			<br>
@@ -146,7 +150,7 @@
 	<br>
 
 	<!-- Paginación -->
-	<div id="pages" class="container justify-content-center no-display">
+	<div id="pages" class="justify-content-center no-display">
 		<nav>
 			<ul class="paginacion">
 				<li class="page-item"><a id="pag-prev" class="pag-but pag-prev"
@@ -187,7 +191,7 @@ function jumpPage() {
 	var input = prompt("Indica a qué página quieres acceder: (entre 1 y " + maxPag + ")");
 
 	if(input>= "1" && input<=maxPag) {
-	window.location.href = "/public/ofertas?page=" + input + "&tipo=" + tipo;
+	window.location.href = "/public/ofertas?page=" + input;
 	} else if(input == null || input == "") {
 		
 	} else {
@@ -239,7 +243,7 @@ function afterLoad() {
     	if(url.search("page=1") !="-1" || url.search("page") == "-1") {
         document.getElementById("pag-d...").onclick = "";
         document.getElementById("pag-d...").innerHTML = "3";
-        document.getElementById("pag-d...").href = "/public/ofertas?page=3;
+        document.getElementById("pag-d...").href = "/public/productos?page=3&tipo=" + tipo;
     	} else if(url.search("page=2") !="-1") {
         document.getElementById("pag-d...").style.display = "none";
     	} else if(url.search("page=3") !="-1") {
@@ -248,7 +252,7 @@ function afterLoad() {
     	} else if(url.search("page=4") !="-1" || url.search("page") == "-1") {
         document.getElementById("pag-i...").onclick = "";
         document.getElementById("pag-i...").innerHTML = "2";
-        document.getElementById("pag-i...").href = "/public/productos?page=2;
+        document.getElementById("pag-i...").href = "/public/productos?page=2&tipo=" + tipo;
         }
     }
     
@@ -296,44 +300,6 @@ function afterLoad() {
 
     document.getElementById("pages").classList.add("d-flex");
     document.getElementById("pages").classList.remove("no-display");
-    
-	//Sidebar item
-    if(url.search("COMPLEMENTARIO") != "-1") {
-        
-  	   var t1=document.getElementById("t1");
-        
-        aux = document.createElement('div');
-        aux.innerHTML = t1.innerHTML;
-        aux.classList.add("actual-item");
-        
-        t1.classList.forEach(el => aux.classList.add(el));
-        t1.parentNode.replaceChild(aux, t1);
-        
-    } else if(url.search("INDEPENDIENTE") != "-1") {
-		  
-  	  var t2=document.getElementById("t2");
-        
-        aux = document.createElement('div');
-        aux.innerHTML = t2.innerHTML;
-        aux.classList.add("actual-item");
-        
-        t2.classList.forEach(el => aux.classList.add(el));
-        t2.parentNode.replaceChild(aux, t2);
-        
-    } else {
-		var t=document.getElementById("t");
-        
-        aux = document.createElement('div');
-        aux.innerHTML = t.innerHTML;
-        aux.classList.add("actual-item");
-        
-        t.classList.forEach(el => aux.classList.add(el));
-        t.parentNode.replaceChild(aux, t);
-        
-        var path = url.split("&");
-        console.log(path[0]);
-        window.history.pushState(history.state,document.title, path[0]);
-    }
 	
 	//Exclusivo móvil
 	if(isMobile() === true) {
