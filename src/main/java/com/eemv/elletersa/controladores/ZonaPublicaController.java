@@ -160,10 +160,17 @@ public class ZonaPublicaController {
 
 	@GetMapping("/tratamientos/{id}")
 	public String showTratamiento(Model model, @PathVariable Long id) {
-		Tratamiento result = tratamientoServicio.findById(id); 
+		Tratamiento result = tratamientoServicio.findById(id);
+		String hayRecomendaciones = "hay";
 		if (result != null) {
 			model.addAttribute("tratamiento", result);
+			
+			if(result.getProductosRecomendados() == null || result.getProductosRecomendados().isEmpty()) {
+				hayRecomendaciones = null;
+			}
+			model.addAttribute("hayRecomendaciones", hayRecomendaciones);
 		}
+		
 		model.addAttribute("usuario", new Usuario());
 		return "app/tratamiento/form";
 	}

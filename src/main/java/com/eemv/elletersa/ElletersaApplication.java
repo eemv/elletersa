@@ -87,6 +87,7 @@ public class ElletersaApplication {
 			Producto p5 = productoRepository.getOne(5L);
 			Producto p3 = productoRepository.getOne(3L);
 			Producto p2 = productoRepository.getOne(2L);
+			Producto p1 = productoRepository.getOne(1L);
 			
 			Tratamiento t2 = tratamientoRepository.getOne(2L);
 			Tratamiento t3 = tratamientoRepository.getOne(3L);
@@ -98,6 +99,8 @@ public class ElletersaApplication {
 			List<Tratamiento> lt2 = new ArrayList<>();
 			List<Tratamiento> lt3 = new ArrayList<>();
 			l1.add(p5);
+			l1.add(p1);
+			l1.add(p2);
 
 			l2.add(p3);
 			l3.add(p5);

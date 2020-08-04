@@ -9,6 +9,10 @@ textarea {
 	resize: none;
 }
 
+label {
+    font-weight: 600;
+}
+
 .form-control:disabled, .form-control[readonly] {
 	background-color: white !important;
 }
