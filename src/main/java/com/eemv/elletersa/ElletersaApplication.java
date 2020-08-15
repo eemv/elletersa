@@ -140,10 +140,12 @@ public class ElletersaApplication {
 			
 			Pack pck1 = new Pack("pack1", l1, lt1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
 					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
-//			Pack pck2 = new Pack("pack2", l3, lt3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+//			Pack pck2 = new Pack("pack2", new ArrayList<Producto>(), lt1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
 //					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
 			Pack pck3 = new Pack("pack3", l2, lt2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
 					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
+//			Pack pck4 = new Pack("pack4",l1, new ArrayList<Tratamiento>(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lficia deserunt mollit anim id est laborum.",
+//					30.00, "https://images-na.ssl-images-amazon.com/images/I/81mnRoyrC7L._SL1500_.jpg");
 			packRepository.saveAll(Arrays.asList(
 					pck1,pck3));
 		

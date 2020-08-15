@@ -215,11 +215,25 @@ public class ZonaPublicaController {
 
 	@GetMapping("/packs/{id}")
 	public String showPack(Model model, @PathVariable Long id) {
-		Pack result = packServicio.findById(id); 
+		Pack result = packServicio.findById(id);
+		Double precioOriginal = 0.;
 		if (result != null) {
 			model.addAttribute("pack", result);
-//			model.addAttribute("productos",result.getProductos());
-//			model.addAttribute("tratamientos",result.getTratamientos());
+			
+			if(result.getProductos() != null || !result.getProductos().isEmpty()) {
+				for(Producto p : result.getProductos()) {
+					precioOriginal += p.getPrecio();
+				}
+			}
+			
+			if(result.getTratamientos() != null || !result.getTratamientos().isEmpty()) {
+				for(Tratamiento t : result.getTratamientos()) {
+					precioOriginal += t.getPrecioSesion();
+				}
+				model.addAttribute("hayTratamientos", true);
+			}
+			
+			model.addAttribute("precioOriginal", precioOriginal);
 		}
 		model.addAttribute("usuario", new Usuario());
 		return "app/pack/form";

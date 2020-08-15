@@ -233,13 +233,12 @@
 								class="form-control" id="minutosSesion"
 								placeholder="Minutos por sesión" th:field="*{minutosSesion}" readonly/>
 						</div>
-						<p th:text="${hayRecomendaciones}"></p>
 						<label th:if="${hayRecomendaciones != null}" for="productosRecomendados">Productos recomendados</label> 
 						<div class="d-flex wrap" id="productos">			
 							<div style="position:sticky" class="d-inline-grid gradient-box"
 							th:each="tratamiento, itemStat : *{productosRecomendados}">
-							<img class="img-show"
-							th:src="*{productosRecomendados[__${itemStat.index}__].imagen}" alt="productoRecomendado">
+							<a th:href="@{/public/productos/{id}(id=*{productosRecomendados[__${itemStat.index}__].id})}"><img class="img-show"
+							th:src="*{productosRecomendados[__${itemStat.index}__].imagen}" alt="productoRecomendado"></a>
 							<div style="border-image: linear-gradient(to right, #ff00d405, #fff4fd);" class="object-title">
 							<h4 class="" th:text="*{productosRecomendados[__${itemStat.index}__].nombre}"></h4>
 							</div>

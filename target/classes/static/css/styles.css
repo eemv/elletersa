@@ -10,7 +10,39 @@ textarea {
 }
 
 label {
-    font-weight: 600;
+	font-weight: 600;
+}
+
+@media screen and (min-width: 769px) {
+	.plus {
+		font-size: 75px;
+		margin-top: 75px;
+	}
+	.equals {
+		font-size: 75px;
+		margin-top: 75px;
+	}
+	.pack-price {
+		font-size: 60px;
+		margin-top: 90px;
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.plus {
+		font-size: 75px;
+		margin: -11px;
+		-webkit-writing-mode: vertical-lr;
+	}
+	.equals {
+		font-size: 75px;
+   		margin-bottom: 0px;
+		-webkit-writing-mode: vertical-lr;
+	}
+	.pack-price {
+		font-size: 60px;
+		margin-top: 0px;
+	}
 }
 
 .form-control:disabled, .form-control[readonly] {
@@ -258,35 +290,124 @@ to {
 	border-radius: .25rem;
 }
 
-.btn-filter:not (:disabled ):not (.disabled ), .btn-right:not (:disabled
-	):not (.disabled ) {
-	cursor: pointer;
-}
-
 .btn-filter
+
+
+:not
+
+ 
+
+(
+:disabled
+
+ 
+
+)
+:not
+
+ 
+
+(
+.disabled
+
+ 
+
+),
+.btn-right
+
+
+:not
+
+ 
+
+(
+:disabled
+
+
+	
+
+)
+:not
+
+ 
+
+(
+.disabled
+
+ 
+
+)
+{
+cursor
+
+
+:
+
+ 
+
+pointer
+
+
+;
+}
+.btn-filter
+
+
+
+
 .focus
 ,
 .btn-filter
+
+
+
+
 :focus
 ,
 .btn-right
+
+
+
+
 .focus
 ,
 .btn-right
+
+
+
+
 :focus
 ,
 {
 outline
+
+
+
+
 :
+
+
  
+
+
 0;
 box-shadow
+
+
+
+
 :
+
+
  
+
+
 none
+
+
+
+
 ;
-
-
 }
 .btn:focus, .btn:hover {
 	text-decoration: underline;
@@ -659,8 +780,16 @@ footer {
 	50%
 	{
 	background-position
+	
+	
+	
+	
 	:
+	
+	
 	 
+	
+	
 	100%
 	50%;
 }
@@ -668,8 +797,16 @@ footer {
 100%
 {
 background-position
+
+
+
+
 :
+
+
  
+
+
 0%
 50%;
 }
@@ -743,8 +880,16 @@ background-position
 	50%
 	{
 	background-position
+	
+	
+	
+	
 	:
+	
+	
 	 
+	
+	
 	100%
 	50%;
 }
@@ -752,8 +897,16 @@ background-position
 100%
 {
 background-position
+
+
+
+
 :
+
+
  
+
+
 0%
 50%;
 }
